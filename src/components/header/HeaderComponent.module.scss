@@ -1,0 +1,62 @@
+@import "../../styles/main.scss";
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  z-index: 2;
+  box-shadow: $box-shadow;
+  font-family: $poppins;
+
+  &__container {
+    margin: auto;
+    width: 90%;
+    max-width: rem(1440);
+  }
+
+  &__main {
+    height: rem(60);
+
+    @include breakpoint(large) {
+      height: rem(120);
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__logo {
+      &__mobile {
+        display: flex;
+
+        @include breakpoint(large) {
+          display: none;
+        }
+      }
+      &__desktop {
+        display: none;
+
+        @include breakpoint(large) {
+          display: flex;
+        }
+      }
+    }
+
+    &__links {
+      display: none;
+
+      @include breakpoint(large) {
+        display: block;
+      }
+    }
+
+    &__register_button {
+      background-color: $blue;
+      padding: rem(14) rem(18);
+      color: $white;
+      border-radius: rem(8);
+      font-weight: 500;
+    }
+  }
+}
