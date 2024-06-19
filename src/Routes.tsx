@@ -1,10 +1,13 @@
 import { Route, Routes, createBrowserRouter } from "react-router-dom";
 import HomePage from "./routes/HomePage";
+import Layout from "./layout/Layout";
 
 function Root() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+      </Route>
     </Routes>
   );
 }
