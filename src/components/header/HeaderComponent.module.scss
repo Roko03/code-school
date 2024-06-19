@@ -50,5 +50,13 @@
         display: block;
       }
     }
+
+    &__register_button {
+      background-color: $blue;
+      padding: rem(14) rem(18);
+      color: $white;
+      border-radius: rem(8);
+      font-weight: 500;
+    }
   }
 }

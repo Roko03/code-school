@@ -31,6 +31,9 @@ const HeaderComponent = () => {
               isActive={isMenuActive}
               onClick={() => setIsMenuActive(!isMenuActive)}
             />
+            {/* <a href="/login" className={styles.header__main__register_button}>
+              Prijavi se
+            </a> */}
           </div>
         </div>
       </header>
