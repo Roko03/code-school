@@ -10,10 +10,7 @@ const LinkListComponent: React.FC<LinkListComponentProps> = ({ variant }) => {
       className={`${styles.link_list} ${
         variant == "header" ? styles.link_list_header : styles.link_list_footer
       }`}
-    >
-      <li>ja</li>
-      <li>ti</li>
-    </ul>
+    ></ul>
   );
 };
 
