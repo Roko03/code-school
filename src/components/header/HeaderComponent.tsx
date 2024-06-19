@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./HeaderComponent.module.scss";
 import MenuComponent from "./menu/MenuComponent";
 import BurgerMenuComponent from "../burger-menu/BurgerMenuComponent";
+import LinkListComponent from "../link-list/LinkListComponent";
 
 const HeaderComponent = () => {
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
@@ -23,7 +24,9 @@ const HeaderComponent = () => {
                 className={styles.header__main__logo__mobile}
               />
             </a>
-            <div className={styles.header__main__links}></div>
+            <div className={styles.header__main__links}>
+              <LinkListComponent variant={"header"} />
+            </div>
             <BurgerMenuComponent
               isActive={isMenuActive}
               onClick={() => setIsMenuActive(!isMenuActive)}

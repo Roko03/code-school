@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./MenuComponent.module.scss";
 import useScreenSize from "../../../util/useScreenSize";
+import LinkListComponent from "../../link-list/LinkListComponent";
 
 interface MenuComponentProps {
   isActive: boolean;
@@ -52,6 +53,7 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
               className={styles.menu__box__logo__desktop}
             />
           </a>
+          <LinkListComponent variant={"header"} />
         </div>
       </div>
     </div>
