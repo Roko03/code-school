@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./HeaderComponent.module.scss";
 import MenuComponent from "./menu/MenuComponent";
+import BurgerMenuComponent from "../burger-menu/BurgerMenuComponent";
 
 const HeaderComponent = () => {
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
@@ -23,6 +24,10 @@ const HeaderComponent = () => {
               />
             </a>
             <div className={styles.header__main__links}></div>
+            <BurgerMenuComponent
+              isActive={isMenuActive}
+              onClick={() => setIsMenuActive(!isMenuActive)}
+            />
           </div>
         </div>
       </header>
