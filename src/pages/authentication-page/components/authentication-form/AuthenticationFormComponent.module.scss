@@ -1,1 +1,14 @@
 @import "../../../../styles/main.scss";
+
+.authentication_form {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+
+  margin: rem(42) auto;
+  max-width: rem(450);
+
+  button {
+    align-self: baseline;
+  }
+}
