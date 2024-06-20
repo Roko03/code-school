@@ -3,6 +3,7 @@ import styles from "./AuthenticationFormComponent.module.scss";
 import { authenticationSchema } from "../../../../types/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import ButtonComponent from "../../../../components/button/ButtonComponent";
 
 type TAuthenticationSchema = z.infer<typeof authenticationSchema>;
 
@@ -49,7 +50,9 @@ const AuthenticationFormComponent = () => {
           <p className="form_error">{`${errors.password.message}`}</p>
         )}
       </label>
-      <button onClick={handleSubmit(onSubmit)}>Prijavi se</button>
+      <ButtonComponent variant={"add"} onClick={handleSubmit(onSubmit)}>
+        <p>Prijava</p>
+      </ButtonComponent>
     </form>
   );
 };
