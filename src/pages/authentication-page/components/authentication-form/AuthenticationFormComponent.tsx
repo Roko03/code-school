@@ -4,8 +4,11 @@ import { authenticationSchema } from "../../../../types/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ButtonComponent from "../../../../components/button/ButtonComponent";
+import loginUser from "../../../../lib/authentication/loginUser";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../../constants";
+import { useNavigate } from "react-router-dom";
 
-type TAuthenticationSchema = z.infer<typeof authenticationSchema>;
+export type TAuthenticationSchema = z.infer<typeof authenticationSchema>;
 
 const AuthenticationFormComponent = () => {
   const {
@@ -17,9 +20,18 @@ const AuthenticationFormComponent = () => {
     resolver: zodResolver(authenticationSchema),
   });
 
-  const onSubmit = async (data: TAuthenticationSchema) => {
-    console.log(data);
+  const navigate = useNavigate();
 
+  const onSubmit = async (data: TAuthenticationSchema) => {
+    const response = await loginUser(data);
+
+    if (!response.success) {
+      return;
+    }
+
+    localStorage.setItem(ACCESS_TOKEN, response.tokenAccess);
+    localStorage.setItem(REFRESH_TOKEN, response.tokenRefresh);
+    navigate("/");
     reset();
   };
 
