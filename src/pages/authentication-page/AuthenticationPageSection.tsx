@@ -5,7 +5,7 @@ const AuthenticationPageSection = () => {
   return (
     <>
       <section className={styles.authentication_section}>
-        <h2>Prijavi se u sustav</h2>
+        <h1>Prijavi se u sustav</h1>
         <AuthenticationFormComponent />
       </section>
     </>
