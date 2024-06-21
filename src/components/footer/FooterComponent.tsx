@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
 import LinkListComponent from "../link-list/LinkListComponent";
 import styles from "./FooterComponent.module.scss";
+import { authManager } from "../../util/useAuthContext";
 
 const FooterComponent = () => {
+  const authenticationManager = authManager();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__wave}>
@@ -9,7 +13,10 @@ const FooterComponent = () => {
       </div>
       <div className={styles.footer__box}>
         <div className={styles.footer__box__container}>
-          <a href="/" className={styles.footer__box__logo}>
+          <Link
+            to={authenticationManager.isAuthorized ? "/" : "/authentication"}
+            className={styles.footer__box__logo}
+          >
             <img
               src={"/logo-mobile.svg"}
               alt="mobile-logo"
@@ -20,7 +27,7 @@ const FooterComponent = () => {
               alt="mobile-logo"
               className={styles.footer__box__logo__desktop}
             />
-          </a>
+          </Link>
           <LinkListComponent variant={"footer"} />
         </div>
       </div>
