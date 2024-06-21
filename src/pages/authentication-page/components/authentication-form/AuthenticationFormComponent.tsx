@@ -7,6 +7,7 @@ import ButtonComponent from "../../../../components/button/ButtonComponent";
 import loginUser from "../../../../lib/authentication/loginUser";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
+import { authManager } from "../../../../util/useAuthContext";
 
 export type TAuthenticationSchema = z.infer<typeof authenticationSchema>;
 
@@ -20,6 +21,8 @@ const AuthenticationFormComponent = () => {
     resolver: zodResolver(authenticationSchema),
   });
 
+  const authenticationManager = authManager();
+
   const navigate = useNavigate();
 
   const onSubmit = async (data: TAuthenticationSchema) => {
@@ -31,6 +34,7 @@ const AuthenticationFormComponent = () => {
 
     localStorage.setItem(ACCESS_TOKEN, response.tokenAccess);
     localStorage.setItem(REFRESH_TOKEN, response.tokenRefresh);
+    authenticationManager.setIsAuthorized(true);
     navigate("/");
     reset();
   };
