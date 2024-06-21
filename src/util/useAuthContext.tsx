@@ -8,7 +8,7 @@ import getProfile from "../lib/authentication/getProfile";
 const AuthContext = createContext<{
   isAuthorized: boolean | null;
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean | null>>;
-  user: object | null;
+  user: UserType | null;
   logout: () => void;
 } | null>(null);
 
@@ -28,7 +28,7 @@ export const AuthManagerProvider = ({
   children: React.ReactNode;
 }) => {
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -94,6 +94,12 @@ export const AuthManagerProvider = ({
     }
 
     setUser(response.user[0]);
+
+    if (response.user[0].role == "adm") {
+      navigate("/admin");
+    } else {
+      navigate("/");
+    }
   };
 
   useEffect(() => {
