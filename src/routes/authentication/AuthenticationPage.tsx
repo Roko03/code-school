@@ -1,4 +1,4 @@
-import AuthenticationPageSection from "../pages/authentication-page/AuthenticationPageSection";
+import AuthenticationPageSection from "../../pages/authentication-page/AuthenticationPageSection";
 
 const AuthenticationPage = () => {
   return (
