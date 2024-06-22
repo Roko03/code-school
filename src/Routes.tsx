@@ -21,25 +21,25 @@ function Root() {
         </Route>
 
         <Route element={<ProtectedRoute roles={["adm"]} />}>
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/user" element={<AdminWorkshopPage />} />
-          <Route path="/admin/workshop" element={<AdminUserPage />} />
+          <Route path="/admin/" element={<AdminPage />} />
+          <Route path="/admin/user/" element={<AdminWorkshopPage />} />
+          <Route path="/admin/workshop/" element={<AdminUserPage />} />
           <Route
-            path="/admin/organization"
+            path="/admin/organization/"
             element={<AdminOrganizationPage />}
           />
         </Route>
         <Route element={<ProtectedRoute roles={["prof"]} />}>
-          <Route path="/professor" element={<InstructorPage />} />
+          <Route path="/professor/" element={<InstructorPage />} />
           <Route
-            path="/professor/workshop"
+            path="/professor/workshop/"
             element={<InstructorWorkshopPage />}
           />
         </Route>
         <Route element={<ProtectedRoute roles={["stu"]} />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/workshop" element={<WorkshopPage />} />
-          <Route path="/instructor" element={<InstructorPage />} />
+          <Route path="/workshop/" element={<WorkshopPage />} />
+          <Route path="/instructor/" element={<InstructorPage />} />
         </Route>
       </Route>
       <Route path="*" element={<h1>404 page</h1>}></Route>
