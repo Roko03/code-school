@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { authManager } from "../util/useAuthContext";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import CircularProgressComponent from "../components/circular-progress/CircularProgressComponent";
 
 interface ProtectedRouteProps {
   roles: string[];
@@ -25,7 +26,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles }) => {
   }, [auth.user]);
 
   if (isAuthenticated == null) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <CircularProgressComponent />
+      </>
+    );
   }
 
   return auth.isAuthorized == true ? (
@@ -36,7 +41,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles }) => {
         <>{navigate(-1)}</>
       )
     ) : (
-      <div>Loading...</div>
+      <>
+        <CircularProgressComponent />
+      </>
     )
   ) : (
     <Navigate to={"/authentication"} />
