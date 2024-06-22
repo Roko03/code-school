@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { authManager } from "../util/useAuthContext";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   roles: string[];
@@ -11,6 +11,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles }) => {
   const [redirectRoute, setRedirectRoute] = useState<string>("/");
 
   const auth = authManager();
+  const navigate = useNavigate();
 
   const authenticate = () => {
     if (auth.isAuthorized && auth.user) {
@@ -41,10 +42,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles }) => {
       isAuthenticated ? (
         <Outlet />
       ) : (
-        <Navigate to={`${redirectRoute}`} />
+        <>{navigate(-1)}</>
       )
     ) : (
-      <div>Loading</div>
+      <div>Loading...</div>
     )
   ) : (
     <Navigate to={"/authentication"} />

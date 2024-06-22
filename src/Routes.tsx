@@ -5,12 +5,15 @@ import AuthenticationPage from "./routes/AuthenticationPage";
 import AdminPage from "./routes/AdminPage";
 import WorkshopPage from "./routes/WorkshopPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import AuthenticationRoute from "./routes/AuthenticationRoute";
 
 function Root() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/authentication" element={<AuthenticationPage />} />
+        <Route element={<AuthenticationRoute />}>
+          <Route path="/authentication" element={<AuthenticationPage />} />
+        </Route>
 
         <Route element={<ProtectedRoute roles={["adm"]} />}>
           <Route path="/admin" element={<AdminPage />} />
