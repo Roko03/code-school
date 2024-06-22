@@ -1,5 +1,5 @@
 export default async function refreshToken(token: string) {
-    const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACK_BASE_URL}/api/token/`, {
+    const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACK_BASE_URL}/api/token/refresh`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
