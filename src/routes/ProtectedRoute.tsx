@@ -8,7 +8,6 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles }) => {
   const [isAuthenticated, setIsAuthorized] = useState<boolean | null>(null);
-  const [redirectRoute, setRedirectRoute] = useState<string>("/");
 
   const auth = authManager();
   const navigate = useNavigate();
@@ -16,14 +15,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles }) => {
   const authenticate = () => {
     if (auth.isAuthorized && auth.user) {
       setIsAuthorized(roles.includes(auth.user.role));
-
-      if (auth.user.role == "adm") {
-        setRedirectRoute("admin");
-      } else if (auth.user.role == "prof") {
-        setRedirectRoute("professor");
-      } else {
-        setRedirectRoute("/");
-      }
     }
   };
 
