@@ -23,19 +23,9 @@ const AuthenticationFormComponent = () => {
 
   const authenticationManager = authManager();
 
-  const navigate = useNavigate();
-
   const onSubmit = async (data: TAuthenticationSchema) => {
-    const response = await loginUser(data);
+    authenticationManager.login(data);
 
-    if (!response.success) {
-      return;
-    }
-
-    localStorage.setItem(ACCESS_TOKEN, response.tokenAccess);
-    localStorage.setItem(REFRESH_TOKEN, response.tokenRefresh);
-    authenticationManager.setIsAuthorized(true);
-    navigate("/");
     reset();
   };
 

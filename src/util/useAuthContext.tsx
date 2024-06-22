@@ -4,11 +4,14 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import refreshToken from "../lib/authentication/refreshToken";
 import { useNavigate } from "react-router-dom";
 import getProfile from "../lib/authentication/getProfile";
+import loginUser from "../lib/authentication/loginUser";
+import { TAuthenticationSchema } from "../pages/authentication-page/components/authentication-form/AuthenticationFormComponent";
 
 const AuthContext = createContext<{
   isAuthorized: boolean | null;
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean | null>>;
   user: UserType | null;
+  login: (data: TAuthenticationSchema) => void;
   logout: () => void;
 } | null>(null);
 
@@ -30,6 +33,28 @@ export const AuthManagerProvider = ({
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
   const navigate = useNavigate();
+
+  const login = async (data: TAuthenticationSchema) => {
+    const response = await loginUser(data);
+
+    navigate("/login");
+
+    localStorage.setItem(ACCESS_TOKEN, response.tokenAccess);
+    localStorage.setItem(REFRESH_TOKEN, response.tokenRefresh);
+    setIsAuthorized(true);
+
+    const user = await getProfile(response.tokenAccess);
+
+    if (!user.success) {
+      logout();
+    }
+
+    if (user.user[0].role == "adm") {
+      navigate("/admin");
+    } else {
+      navigate("/professor");
+    }
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -94,12 +119,6 @@ export const AuthManagerProvider = ({
     }
 
     setUser(response.user[0]);
-
-    if (response.user[0].role == "adm") {
-      navigate("/admin");
-    } else {
-      navigate("/");
-    }
   };
 
   useEffect(() => {
@@ -117,7 +136,7 @@ export const AuthManagerProvider = ({
 
   return (
     <AuthContext.Provider
-      value={{ isAuthorized, setIsAuthorized, user, logout }}
+      value={{ isAuthorized, setIsAuthorized, user, login, logout }}
     >
       {children}
     </AuthContext.Provider>

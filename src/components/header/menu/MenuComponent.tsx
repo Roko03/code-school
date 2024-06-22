@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import styles from "./MenuComponent.module.scss";
 import useScreenSize from "../../../util/useScreenSize";
 import LinkListComponent from "../../link-list/LinkListComponent";
+import ButtonComponent from "../../button/ButtonComponent";
+import { authManager } from "../../../util/useAuthContext";
 
 interface MenuComponentProps {
   isActive: boolean;
@@ -14,6 +16,7 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
 }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const screenSize = useScreenSize();
+  const auth = authManager();
 
   useEffect(() => {
     const handleOutSideBox = (e: MouseEvent) => {
@@ -54,6 +57,9 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
             />
           </a>
           <LinkListComponent variant={"header"} />
+          <ButtonComponent variant={"add"} onClick={() => auth.logout()}>
+            <p>Logout</p>
+          </ButtonComponent>
         </div>
       </div>
     </div>
