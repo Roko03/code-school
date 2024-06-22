@@ -31,23 +31,6 @@
       flex-direction: column;
       gap: rem(32);
     }
-
-    &__logo {
-      &__mobile {
-        display: block;
-
-        @media only screen and (min-width: rem(550)) {
-          display: none;
-        }
-      }
-      &__desktop {
-        display: none;
-
-        @media only screen and (min-width: rem(550)) {
-          display: block;
-        }
-      }
-    }
   }
 }
 

@@ -5,6 +5,7 @@ import BurgerMenuComponent from "../burger-menu/BurgerMenuComponent";
 import LinkListComponent from "../link-list/LinkListComponent";
 import { Link } from "react-router-dom";
 import { authManager } from "../../util/useAuthContext";
+import LogoComponent from "../logo/LogoComponent";
 
 const HeaderComponent = () => {
   const authenticationManager = authManager();
@@ -15,21 +16,7 @@ const HeaderComponent = () => {
       <header className={styles.header}>
         <div className={styles.header__container}>
           <div className={styles.header__main}>
-            <Link
-              to={authenticationManager.isAuthorized ? "/" : "/authentication"}
-              className={styles.header__main_logo}
-            >
-              <img
-                src={"/logo-desktop.svg"}
-                alt="logo"
-                className={styles.header__main__logo__desktop}
-              />
-              <img
-                src={"/logo-mobile.svg"}
-                alt="logo"
-                className={styles.header__main__logo__mobile}
-              />
-            </Link>
+            <LogoComponent />
             <div className={styles.header__main__links}>
               <LinkListComponent variant={"header"} />
             </div>
