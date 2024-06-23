@@ -1,5 +1,11 @@
+import StudentLayout from "../../components/layout/student/StudentLayout";
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <StudentLayout hasBanner={true} bannerTitle={"Naslovna"}>
+      <div>HomePage</div>
+    </StudentLayout>
+  );
 };
 
 export default HomePage;
