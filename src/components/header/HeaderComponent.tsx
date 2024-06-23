@@ -6,6 +6,7 @@ import LinkListComponent from "../link-list/LinkListComponent";
 import { Link } from "react-router-dom";
 import { authManager } from "../../util/useAuthContext";
 import LogoComponent from "../logo/LogoComponent";
+import ProfileComponent from "../profile/ProfileComponent";
 
 const HeaderComponent = () => {
   const authenticationManager = authManager();
@@ -33,6 +34,7 @@ const HeaderComponent = () => {
                 Prijavi se
               </Link>
             )}
+            <ProfileComponent />
           </div>
         </div>
       </header>
