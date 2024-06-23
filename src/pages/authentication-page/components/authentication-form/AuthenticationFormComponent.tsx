@@ -4,9 +4,6 @@ import { authenticationSchema } from "../../../../types/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ButtonComponent from "../../../../components/button/ButtonComponent";
-import loginUser from "../../../../lib/authentication/loginUser";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../../constants";
-import { useNavigate } from "react-router-dom";
 import { authManager } from "../../../../util/useAuthContext";
 
 export type TAuthenticationSchema = z.infer<typeof authenticationSchema>;
@@ -15,7 +12,7 @@ const AuthenticationFormComponent = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<TAuthenticationSchema>({
     resolver: zodResolver(authenticationSchema),
