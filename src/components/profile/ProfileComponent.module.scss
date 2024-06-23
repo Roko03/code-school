@@ -1,0 +1,61 @@
+@import "../../styles/main.scss";
+
+.profile {
+  position: relative;
+  display: none;
+  width: rem(50);
+  height: rem(50);
+  border-radius: 100%;
+
+  @include breakpoint(large) {
+    display: flex;
+  }
+
+  &__button {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 100%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__modal {
+    position: absolute;
+    z-index: 99;
+    top: 120%;
+    right: 0;
+    background-color: $white;
+    box-shadow: $box-shadow;
+    width: rem(180);
+    height: rem(140);
+    border-radius: rem(4);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.31s ease-in-out;
+
+    &__container {
+      padding: rem(24) rem(18);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(24);
+
+      button {
+        margin-top: auto !important;
+      }
+    }
+  }
+
+  &__modal_open {
+    opacity: 1;
+    visibility: visible;
+  }
+}

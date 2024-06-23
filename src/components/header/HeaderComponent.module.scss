@@ -26,23 +26,6 @@
     align-items: center;
     justify-content: space-between;
 
-    &__logo {
-      &__mobile {
-        display: flex;
-
-        @include breakpoint(large) {
-          display: none;
-        }
-      }
-      &__desktop {
-        display: none;
-
-        @include breakpoint(large) {
-          display: flex;
-        }
-      }
-    }
-
     &__links {
       display: none;
 

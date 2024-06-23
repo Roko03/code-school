@@ -1,5 +1,6 @@
 import LinkListComponent from "../link-list/LinkListComponent";
 import styles from "./FooterComponent.module.scss";
+import LogoComponent from "../logo/LogoComponent";
 
 const FooterComponent = () => {
   return (
@@ -9,18 +10,9 @@ const FooterComponent = () => {
       </div>
       <div className={styles.footer__box}>
         <div className={styles.footer__box__container}>
-          <a href="/" className={styles.footer__box__logo}>
-            <img
-              src={"/logo-mobile.svg"}
-              alt="mobile-logo"
-              className={styles.footer__box__logo__mobile}
-            />
-            <img
-              src={"/logo-desktop.svg"}
-              alt="mobile-logo"
-              className={styles.footer__box__logo__desktop}
-            />
-          </a>
+          <div className={styles.footer__box__container__logo}>
+            <LogoComponent />
+          </div>
           <LinkListComponent variant={"footer"} />
         </div>
       </div>

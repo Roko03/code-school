@@ -1,0 +1,19 @@
+@import "../../styles/main.scss";
+
+.logo {
+  display: block;
+  &__mobile {
+    display: flex;
+
+    @include breakpoint(large) {
+      display: none;
+    }
+  }
+  &__desktop {
+    display: none;
+
+    @include breakpoint(large) {
+      display: flex;
+    }
+  }
+}

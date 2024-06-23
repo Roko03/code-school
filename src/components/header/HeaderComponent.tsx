@@ -3,8 +3,13 @@ import styles from "./HeaderComponent.module.scss";
 import MenuComponent from "./menu/MenuComponent";
 import BurgerMenuComponent from "../burger-menu/BurgerMenuComponent";
 import LinkListComponent from "../link-list/LinkListComponent";
+import { Link } from "react-router-dom";
+import { authManager } from "../../util/useAuthContext";
+import LogoComponent from "../logo/LogoComponent";
+import ProfileComponent from "../profile/ProfileComponent";
 
 const HeaderComponent = () => {
+  const authenticationManager = authManager();
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
 
   return (
@@ -12,28 +17,26 @@ const HeaderComponent = () => {
       <header className={styles.header}>
         <div className={styles.header__container}>
           <div className={styles.header__main}>
-            <a className={styles.header__main_logo}>
-              <img
-                src={"/logo-desktop.svg"}
-                alt="logo"
-                className={styles.header__main__logo__desktop}
-              />
-              <img
-                src={"/logo-mobile.svg"}
-                alt="logo"
-                className={styles.header__main__logo__mobile}
-              />
-            </a>
+            <LogoComponent />
             <div className={styles.header__main__links}>
               <LinkListComponent variant={"header"} />
             </div>
-            <BurgerMenuComponent
-              isActive={isMenuActive}
-              onClick={() => setIsMenuActive(!isMenuActive)}
-            />
-            {/* <a href="/login" className={styles.header__main__register_button}>
-              Prijavi se
-            </a> */}
+            {authenticationManager.isAuthorized ? (
+              <>
+                <BurgerMenuComponent
+                  isActive={isMenuActive}
+                  onClick={() => setIsMenuActive(!isMenuActive)}
+                />
+                <ProfileComponent />
+              </>
+            ) : (
+              <Link
+                to={"/authentication"}
+                className={styles.header__main__register_button}
+              >
+                Prijavi se
+              </Link>
+            )}
           </div>
         </div>
       </header>

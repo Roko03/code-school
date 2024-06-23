@@ -44,26 +44,11 @@
       margin: auto;
       max-width: rem(1440);
       height: 100%;
-    }
 
-    &__logo {
-      align-self: baseline;
-      img {
-        filter: brightness(10000%);
-      }
-
-      &__mobile {
-        display: flex;
-
-        @include breakpoint(large) {
-          display: none;
-        }
-      }
-      &__desktop {
-        display: none;
-
-        @include breakpoint(large) {
-          display: flex;
+      &__logo {
+        align-self: baseline;
+        img {
+          filter: brightness(10000%) !important;
         }
       }
     }
