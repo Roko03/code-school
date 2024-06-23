@@ -36,7 +36,9 @@ const ProfileComponent = () => {
         <div
           className={styles.profile__button}
           onClick={() => setIsModalOpen(!isModalOpen)}
-        ></div>
+        >
+          <img src={"/background-banner.png"} />
+        </div>
         <div
           className={`${styles.profile__modal} ${
             isModalOpen ? styles.profile__modal_open : ""
