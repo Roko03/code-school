@@ -22,10 +22,13 @@ const HeaderComponent = () => {
               <LinkListComponent variant={"header"} />
             </div>
             {authenticationManager.isAuthorized ? (
-              <BurgerMenuComponent
-                isActive={isMenuActive}
-                onClick={() => setIsMenuActive(!isMenuActive)}
-              />
+              <>
+                <BurgerMenuComponent
+                  isActive={isMenuActive}
+                  onClick={() => setIsMenuActive(!isMenuActive)}
+                />
+                <ProfileComponent />
+              </>
             ) : (
               <Link
                 to={"/authentication"}
@@ -34,7 +37,6 @@ const HeaderComponent = () => {
                 Prijavi se
               </Link>
             )}
-            <ProfileComponent />
           </div>
         </div>
       </header>
