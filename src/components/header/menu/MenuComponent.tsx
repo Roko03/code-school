@@ -5,6 +5,7 @@ import LinkListComponent from "../../link-list/LinkListComponent";
 import ButtonComponent from "../../button/ButtonComponent";
 import { authManager } from "../../../util/useAuthContext";
 import LogoComponent from "../../logo/LogoComponent";
+import CircularProgressComponent from "../../circular-progress/CircularProgressComponent";
 
 interface MenuComponentProps {
   isActive: boolean;
@@ -47,9 +48,25 @@ const MenuComponent: React.FC<MenuComponentProps> = ({
         <div className={styles.menu__box__container}>
           <LogoComponent />
           <LinkListComponent variant={"header"} />
-          <ButtonComponent variant={"add"} onClick={() => auth.logout()}>
-            <p>Logout</p>
-          </ButtonComponent>
+          {auth.isAuthorized && (
+            <div className={styles.menu__box__container__profile}>
+              <img
+                src={"/background-banner.png"}
+                alt="profile-image"
+                className={styles.menu__box__container__profile__image}
+              />
+              {auth.user ? (
+                <p className={styles.menu__box__container__profile__username}>
+                  {auth.user.username}
+                </p>
+              ) : (
+                <CircularProgressComponent />
+              )}
+              <ButtonComponent variant={"add"} onClick={() => auth.logout()}>
+                <p>Odjavi se</p>
+              </ButtonComponent>
+            </div>
+          )}
         </div>
       </div>
     </div>
