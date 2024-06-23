@@ -1,6 +1,7 @@
 @import "../../styles/main.scss";
 
 .header {
+  position: fixed;
   width: 100%;
   display: flex;
   flex-direction: column;
