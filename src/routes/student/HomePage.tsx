@@ -1,10 +1,10 @@
-import StudentLayout from "../../components/layout/student/StudentLayout";
+import BannerLayout from "../../components/layout/banner-layout/BannerLayout";
 
 const HomePage = () => {
   return (
-    <StudentLayout hasBanner={true} bannerTitle={"Naslovna"}>
+    <BannerLayout hasBanner={true} bannerTitle={"Naslovna"}>
       <div>HomePage</div>
-    </StudentLayout>
+    </BannerLayout>
   );
 };
 

@@ -1,13 +1,13 @@
 import BannerComponent from "../../banner/BannerComponent";
 import ContainerLayout from "../../container/ContainerLayout";
 
-interface StudentLayoutProps {
+interface BannerLayoutProps {
   hasBanner: boolean;
   children: React.ReactNode;
   bannerTitle: string;
 }
 
-const StudentLayout: React.FC<StudentLayoutProps> = ({
+const BannerLayout: React.FC<BannerLayoutProps> = ({
   hasBanner,
   children,
   bannerTitle,
@@ -20,4 +20,4 @@ const StudentLayout: React.FC<StudentLayoutProps> = ({
   );
 };
 
-export default StudentLayout;
+export default BannerLayout;

@@ -1,0 +1,9 @@
+@import "../../../styles/main.scss";
+
+.main_layout {
+  padding: rem(70) 0 rem(32);
+
+  @include breakpoint(large) {
+    padding: rem(130) 0 rem(42);
+  }
+}
