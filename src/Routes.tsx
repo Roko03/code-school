@@ -12,6 +12,7 @@ import WorkshopPage from "./routes/student/WorkshopPage";
 import ProfessorPage from "./routes/professor/ProfessorPage";
 import ProfessorWorkshopPage from "./routes/professor/ProfessorWorkshopPage";
 import InstructorPage from "./routes/student/InstructorPage";
+import ErrorPage from "./routes/ErrorPage";
 
 function Root() {
   return (
@@ -43,7 +44,7 @@ function Root() {
           <Route path="/instructor/" element={<InstructorPage />} />
         </Route>
       </Route>
-      <Route path="*" element={<h1>404 page</h1>}></Route>
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
