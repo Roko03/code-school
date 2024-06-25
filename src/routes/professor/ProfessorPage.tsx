@@ -1,5 +1,11 @@
+import MainLayout from "../../components/layout/main-layout/MainLayout";
+
 const ProfessorPage = () => {
-  return <div>ProfessorPage</div>;
+  return (
+    <MainLayout>
+      <div>ProfessorPage</div>
+    </MainLayout>
+  );
 };
 
 export default ProfessorPage;
