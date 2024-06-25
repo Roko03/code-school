@@ -1,5 +1,7 @@
+import MainLayout from "../../components/layout/main-layout/MainLayout";
+
 const AdminUserPage = () => {
-  return <div>AdminUserPage</div>;
+  return <MainLayout>AdminUserPage</MainLayout>;
 };
 
 export default AdminUserPage;
