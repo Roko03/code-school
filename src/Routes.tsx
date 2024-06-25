@@ -5,12 +5,13 @@ import AdminPage from "./routes/admin/AdminPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AuthenticationRoute from "./routes/AuthenticationRoute";
 import AuthenticationPage from "./routes/authentication/AuthenticationPage";
-import InstructorPage from "./routes/professor/InstructorPage";
 import AdminUserPage from "./routes/admin/AdminUserPage";
 import AdminOrganizationPage from "./routes/admin/AdminOrganizationPage";
 import AdminWorkshopPage from "./routes/admin/AdminWorkshopPage";
-import InstructorWorkshopPage from "./routes/professor/InstructorWorkshopPage";
 import WorkshopPage from "./routes/student/WorkshopPage";
+import ProfessorPage from "./routes/professor/ProfessorPage";
+import ProfessorWorkshopPage from "./routes/professor/ProfessorWorkshopPage";
+import InstructorPage from "./routes/student/InstructorPage";
 
 function Root() {
   return (
@@ -30,10 +31,10 @@ function Root() {
           />
         </Route>
         <Route element={<ProtectedRoute roles={["prof"]} />}>
-          <Route path="/professor/" element={<InstructorPage />} />
+          <Route path="/professor/" element={<ProfessorPage />} />
           <Route
             path="/professor/workshop/"
-            element={<InstructorWorkshopPage />}
+            element={<ProfessorWorkshopPage />}
           />
         </Route>
         <Route element={<ProtectedRoute roles={["stu"]} />}>
