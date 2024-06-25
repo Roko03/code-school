@@ -37,6 +37,10 @@ export const AuthManagerProvider = ({
   const login = async (data: TAuthenticationSchema) => {
     const response = await loginUser(data);
 
+    if (!response.success) {
+      return;
+    }
+
     localStorage.setItem(ACCESS_TOKEN, response.tokenAccess);
     localStorage.setItem(REFRESH_TOKEN, response.tokenRefresh);
     setIsAuthorized(true);
