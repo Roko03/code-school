@@ -1,5 +1,11 @@
+import BannerLayout from "../../components/layout/banner-layout/BannerLayout";
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <BannerLayout hasBanner={true} variant={"main"} bannerTitle={"Dobrodošli"}>
+      <div>HomePage</div>
+    </BannerLayout>
+  );
 };
 
 export default HomePage;

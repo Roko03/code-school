@@ -37,7 +37,9 @@ export const AuthManagerProvider = ({
   const login = async (data: TAuthenticationSchema) => {
     const response = await loginUser(data);
 
-    navigate("/login");
+    if (!response.success) {
+      return;
+    }
 
     localStorage.setItem(ACCESS_TOKEN, response.tokenAccess);
     localStorage.setItem(REFRESH_TOKEN, response.tokenRefresh);
@@ -51,8 +53,10 @@ export const AuthManagerProvider = ({
 
     if (user.user[0].role == "adm") {
       navigate("/admin");
-    } else {
+    } else if (user.user[0].role == "prof") {
       navigate("/professor");
+    } else {
+      navigate("/");
     }
   };
 

@@ -1,5 +1,15 @@
+import BannerLayout from "../../components/layout/banner-layout/BannerLayout";
+
 const InstructorPage = () => {
-  return <div>InstructorPage</div>;
+  return (
+    <BannerLayout
+      hasBanner={true}
+      variant={"secondary"}
+      bannerTitle={"Predavači"}
+    >
+      <div>Predavači</div>
+    </BannerLayout>
+  );
 };
 
 export default InstructorPage;

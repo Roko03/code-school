@@ -1,5 +1,7 @@
+import MainLayout from "../../components/layout/main-layout/MainLayout";
+
 const AdminWorkshopPage = () => {
-  return <div>AdminWorkshopPage</div>;
+  return <MainLayout>AdminWorkshopPage</MainLayout>;
 };
 
 export default AdminWorkshopPage;
