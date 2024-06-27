@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./AdminUserPageSection.module.scss";
 import AdminUserRoleSelector from "./components/admin-user-role-selector/AdminUserRoleSelector";
 import { useSearchParams } from "react-router-dom";
+import AdminUserListComponent from "./components/admin-user-list/AdminUserListComponent";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,7 @@ const AdminUserPageSection = () => {
           setRoleSelected(value)
         }
       />
+      <AdminUserListComponent />
     </section>
   );
 };
