@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AdminUserTableComponent from "./components/admin-user-table/AdminUserTableComponent";
+import AdminUserListMobileComponent from "./components/admin-user-list-mobile/AdminUserListMobileComponent";
 
 interface AdminUserListComponentProps {
   type: "-" | "adm" | "prof" | "stu";
@@ -13,7 +14,7 @@ const AdminUserListComponent: React.FC<AdminUserListComponentProps> = ({
       id: 1,
       username: "User1",
       email: "user1@gmaiil.com",
-      bio: "ja",
+      bio: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed libero ab praesentium molestias quaerat, dolore autem fuga necessitatibus minus. Voluptatum placeat enim cum sunt ad nihil rerum impedit similique? Odit illum, natus praesentium dolores asperiores tempore voluptatibus, quaerat rem modi quia maxime ab quo dolore reprehenderit. Facere officiis dolore quis!",
       role: "prof",
     },
     {
@@ -35,6 +36,7 @@ const AdminUserListComponent: React.FC<AdminUserListComponentProps> = ({
   return (
     <>
       <AdminUserTableComponent userList={userList} type={type} />
+      <AdminUserListMobileComponent userList={userList} type={type} />
     </>
   );
 };
