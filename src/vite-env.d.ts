@@ -4,6 +4,6 @@ type UserType = {
     id: number;
     username: string;
     email: string;
-    bio: string;
+    bio: string | null;
     role: 'adm' | 'stu' | 'prof';
 }

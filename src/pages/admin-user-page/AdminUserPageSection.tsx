@@ -22,7 +22,7 @@ const AdminUserPageSection = () => {
           setRoleSelected(value)
         }
       />
-      <AdminUserListComponent />
+      <AdminUserListComponent type={query} />
     </section>
   );
 };

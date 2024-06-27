@@ -1,6 +1,12 @@
-@import "../../../../styles/main.scss";
+@import "../../../../../../styles/main.scss";
 
-.admin_user_list {
+.admin_user_table {
+  display: none;
+
+  @include breakpoint(large) {
+    display: table;
+  }
+
   margin-top: rem(32);
   font-family: $poppins;
   width: 100%;
