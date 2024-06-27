@@ -17,7 +17,7 @@ const LinkListComponent: React.FC<LinkListComponentProps> = ({ variant }) => {
             <>
               <li>
                 <NavLink
-                  to={"/admin/user/"}
+                  to={"/admin/user"}
                   className={({ isActive }) =>
                     isActive ? styles.link_list__active : ""
                   }
