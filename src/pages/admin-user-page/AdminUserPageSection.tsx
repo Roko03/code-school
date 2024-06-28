@@ -158,6 +158,7 @@ const AdminUserPageSection = () => {
           setTargetUserId(null);
         }}
       >
+        <img src={"/plus.svg"} alt="plus-image" />
         <p>Dodaj korisnika</p>
       </ButtonComponent>
       <AdminUserRoleSelector
