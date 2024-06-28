@@ -20,6 +20,18 @@
   border-radius: rem(14);
 }
 
+.delete_button {
+  align-self: baseline;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: rem(12);
+  padding: rem(16) rem(32);
+  background-color: $red;
+  color: $white;
+  border-radius: rem(14);
+}
+
 .admin_button {
   align-self: baseline;
   width: rem(50);

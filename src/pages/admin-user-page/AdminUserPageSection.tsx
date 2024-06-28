@@ -12,6 +12,7 @@ import AdminUserFormComponent, {
 } from "./components/admin-user-form/AdminUserFormComponent";
 import getUserById from "../../lib/user/getUserById";
 import editUserById from "../../lib/user/editUserById";
+import AdminUserDeleteComponent from "./components/admin-user-delete/AdminUserDeleteComponent";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -35,6 +36,12 @@ const AdminUserPageSection = () => {
 
   const [targerUser, setTargetUser] = useState<null | UserType>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const closeDialogFunction = () => {
+    setIsModalOpen(false);
+    setTargetUserId(null);
+    setTargetUser(null);
+  };
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -73,9 +80,7 @@ const AdminUserPageSection = () => {
       return;
     }
 
-    setIsModalOpen(false);
-    setTargetUserId(null);
-    setTargetUser(null);
+    closeDialogFunction();
     fetchUsers();
   };
 
@@ -102,7 +107,12 @@ const AdminUserPageSection = () => {
           editFunction={(data: TAdminUserSchema) => editUser(data)}
         />
       ),
-      delete: <></>,
+      delete: (
+        <AdminUserDeleteComponent
+          closeDialog={() => closeDialogFunction()}
+          user={targerUser}
+        />
+      ),
     };
 
     return formVariant[type];
@@ -135,11 +145,7 @@ const AdminUserPageSection = () => {
       />
       <AdminModalComponent
         isOpen={isModalOpen}
-        closeDialog={() => {
-          setIsModalOpen(false);
-          setTargetUserId(null);
-          setTargetUser(null);
-        }}
+        closeDialog={() => closeDialogFunction()}
         type={modalVariant}
       >
         {getFormByModalVariant(modalVariant)}
