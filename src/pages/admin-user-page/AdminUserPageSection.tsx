@@ -8,6 +8,7 @@ import filterUser from "../../lib/user/filterUser";
 import { number } from "zod";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import AdminUserFormComponent from "./components/admin-user-form/AdminUserFormComponent";
+import getUserById from "../../lib/user/getUserById";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -47,6 +48,16 @@ const AdminUserPageSection = () => {
     setIsLoading(false);
   };
 
+  const fetchUser = async () => {
+    if (targetUserId == null) {
+      return;
+    }
+
+    const response = await getUserById(targetUserId);
+
+    setTargetUser(response);
+  };
+
   const openModalByVariant = (
     variant: "edit" | "delete",
     userid: null | number
@@ -73,6 +84,10 @@ const AdminUserPageSection = () => {
   useEffect(() => {
     fetchUsers();
   }, [query]);
+
+  useEffect(() => {
+    fetchUser();
+  }, [targetUserId]);
 
   return (
     <section className={styles.admin_users_section}>
