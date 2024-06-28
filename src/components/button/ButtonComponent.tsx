@@ -1,6 +1,12 @@
 import styles from "./ButtonComponent.module.scss";
 
-type ButtonType = "add" | "entry" | "search" | "adminEdit" | "adminTrash";
+type ButtonType =
+  | "add"
+  | "delete"
+  | "entry"
+  | "search"
+  | "adminEdit"
+  | "adminTrash";
 
 interface ButtonComponentProps {
   variant: ButtonType;
@@ -20,6 +26,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
   const getButtonVariant = (type: ButtonType): string => {
     const buttonStyle: { [key in ButtonType]: string } = {
       add: styles.add_button,
+      delete: styles.delete_button,
       entry: styles.entry_button,
       search: styles.search_button,
       adminEdit: `${styles.admin_button} ${styles.edit_button}`,

@@ -24,8 +24,8 @@ function Root() {
 
         <Route element={<ProtectedRoute roles={["adm"]} />}>
           <Route path="/admin/" element={<AdminPage />} />
-          <Route path="/admin/user/" element={<AdminWorkshopPage />} />
-          <Route path="/admin/workshop/" element={<AdminUserPage />} />
+          <Route path="/admin/user" element={<AdminUserPage />} />
+          <Route path="/admin/workshop/" element={<AdminWorkshopPage />} />
           <Route
             path="/admin/organization/"
             element={<AdminOrganizationPage />}

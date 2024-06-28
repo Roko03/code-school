@@ -4,6 +4,12 @@ type UserType = {
     id: number;
     username: string;
     email: string;
-    bio: string;
+    bio: string | null;
     role: 'adm' | 'stu' | 'prof';
+}
+
+type SnackBarType = {
+    isOpen: boolean;
+    message: string | null;
+    type: "error" | "success" | null
 }
