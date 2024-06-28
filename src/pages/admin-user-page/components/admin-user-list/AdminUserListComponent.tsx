@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminUserTableComponent from "./components/admin-user-table/AdminUserTableComponent";
 import AdminUserListMobileComponent from "./components/admin-user-list-mobile/AdminUserListMobileComponent";
+import CircularProgressComponent from "../../../../components/circular-progress/CircularProgressComponent";
+import getAllUser from "../../../../lib/user/getAllUser";
+import filterUser from "../../../../lib/user/filterUser";
 
 interface AdminUserListComponentProps {
   type: "-" | "adm" | "prof" | "stu";
@@ -32,6 +35,41 @@ const AdminUserListComponent: React.FC<AdminUserListComponentProps> = ({
       role: "stu",
     },
   ]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetchUsers = async () => {
+    setIsLoading(true);
+
+    let response;
+
+    if (type == "-") {
+      response = await getAllUser();
+    } else {
+      response = await filterUser(type);
+    }
+
+    setUserList(response);
+
+    setIsLoading(false);
+  };
+
+  console.log(userList);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [type]);
+
+  if (isLoading) {
+    return <CircularProgressComponent />;
+  }
+
+  if (userList == null || userList.length == 0) {
+    return (
+      <div style={{ marginTop: "36px" }}>
+        <p>Nema prikaza</p>
+      </div>
+    );
+  }
 
   return (
     <>
