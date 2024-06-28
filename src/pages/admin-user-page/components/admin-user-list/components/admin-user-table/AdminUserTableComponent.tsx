@@ -4,11 +4,16 @@ import styles from "./AdminUserTableComponent.module.scss";
 interface AdminUserTableComponentProps {
   userList: null | UserType[];
   type: "-" | "adm" | "prof" | "stu";
+  openModalByVariant: (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => void;
 }
 
 const AdminUserTableComponent: React.FC<AdminUserTableComponentProps> = ({
   userList,
   type,
+  openModalByVariant,
 }) => {
   const getListItems = (type: "-" | "adm" | "prof" | "stu") => {
     if (userList == null) {
@@ -40,7 +45,7 @@ const AdminUserTableComponent: React.FC<AdminUserTableComponentProps> = ({
           <td className={styles.td_button}>
             <ButtonComponent
               variant={"adminEdit"}
-              onClick={() => console.log(user.id)}
+              onClick={() => openModalByVariant("edit", user.id)}
             >
               <img src={"/pencil.svg"} alt="trash" />
               <span>
@@ -51,7 +56,7 @@ const AdminUserTableComponent: React.FC<AdminUserTableComponentProps> = ({
           <td className={styles.td_button}>
             <ButtonComponent
               variant={"adminTrash"}
-              onClick={() => console.log(user.id)}
+              onClick={() => openModalByVariant("delete", user.id)}
             >
               <img src={"/trash.svg"} alt="trash" />
               <span>

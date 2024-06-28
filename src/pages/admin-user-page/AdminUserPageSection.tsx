@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import AdminUserListComponent from "./components/admin-user-list/AdminUserListComponent";
 import getAllUser from "../../lib/user/getAllUser";
 import filterUser from "../../lib/user/filterUser";
+import { number } from "zod";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -22,6 +23,7 @@ const AdminUserPageSection = () => {
   const [modalVariant, setModalVariant] = useState<
     null | "add" | "edit" | "delete"
   >(null);
+  const [targetUserId, setTargetUserId] = useState<null | number>(null);
 
   const [userList, setUserList] = useState<null | UserType[]>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,6 +44,15 @@ const AdminUserPageSection = () => {
     setIsLoading(false);
   };
 
+  const openModalByVariant = (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => {
+    setIsModalOpen(true);
+    setModalVariant(variant);
+    setTargetUserId(userid);
+  };
+
   useEffect(() => {
     fetchUsers();
   }, [query]);
@@ -58,6 +69,10 @@ const AdminUserPageSection = () => {
         type={query}
         userList={userList}
         isLoading={isLoading}
+        openModalByVariant={(
+          variant: "edit" | "delete",
+          userid: null | number
+        ) => openModalByVariant(variant, userid)}
       />
       {isModalOpen && <div>EJ</div>}
     </section>

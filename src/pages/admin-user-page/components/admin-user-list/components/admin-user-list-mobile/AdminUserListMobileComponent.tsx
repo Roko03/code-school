@@ -4,11 +4,15 @@ import styles from "./AdminUserListMobileComponent.module.scss";
 interface AdminUserListMobileComponentProps {
   userList: null | UserType[];
   type: "-" | "adm" | "prof" | "stu";
+  openModalByVariant: (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => void;
 }
 
 const AdminUserListMobileComponent: React.FC<
   AdminUserListMobileComponentProps
-> = ({ userList, type }) => {
+> = ({ userList, type, openModalByVariant }) => {
   const getUsers = (type: "-" | "adm" | "prof" | "stu") => {
     if (userList == null) {
       return <></>;
@@ -18,7 +22,15 @@ const AdminUserListMobileComponent: React.FC<
       return <>{getAllUser()}</>;
     }
 
-    return <AdminUserListByRoleComponent userList={userList} />;
+    return (
+      <AdminUserListByRoleComponent
+        userList={userList}
+        openModalByVariant={(
+          variant: "edit" | "delete",
+          userid: null | number
+        ) => openModalByVariant(variant, userid)}
+      />
+    );
   };
 
   const getAllUser = () => {
@@ -33,11 +45,29 @@ const AdminUserListMobileComponent: React.FC<
     return (
       <>
         <h1>Admin</h1>
-        <AdminUserListByRoleComponent userList={adminList} />
+        <AdminUserListByRoleComponent
+          userList={adminList}
+          openModalByVariant={(
+            variant: "edit" | "delete",
+            userid: null | number
+          ) => openModalByVariant(variant, userid)}
+        />
         <h1>Profesori</h1>
-        <AdminUserListByRoleComponent userList={professorList} />
+        <AdminUserListByRoleComponent
+          userList={professorList}
+          openModalByVariant={(
+            variant: "edit" | "delete",
+            userid: null | number
+          ) => openModalByVariant(variant, userid)}
+        />
         <h1>Studenti</h1>
-        <AdminUserListByRoleComponent userList={studentList} />
+        <AdminUserListByRoleComponent
+          userList={studentList}
+          openModalByVariant={(
+            variant: "edit" | "delete",
+            userid: null | number
+          ) => openModalByVariant(variant, userid)}
+        />
       </>
     );
   };
@@ -47,8 +77,13 @@ const AdminUserListMobileComponent: React.FC<
 
 const AdminUserListByRoleComponent = ({
   userList,
+  openModalByVariant,
 }: {
   userList: UserType[];
+  openModalByVariant: (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => void;
 }) => {
   return (
     <div className={styles.user_list}>
@@ -73,7 +108,7 @@ const AdminUserListByRoleComponent = ({
             <div className={styles.user_list__item__buttons}>
               <ButtonComponent
                 variant={"adminEdit"}
-                onClick={() => console.log(user.id)}
+                onClick={() => openModalByVariant("edit", user.id)}
               >
                 <img src={"/pencil.svg"} alt="trash" />
                 <span>
@@ -82,7 +117,7 @@ const AdminUserListByRoleComponent = ({
               </ButtonComponent>
               <ButtonComponent
                 variant={"adminTrash"}
-                onClick={() => console.log(user.id)}
+                onClick={() => openModalByVariant("delete", user.id)}
               >
                 <img src={"/trash.svg"} alt="trash" />
                 <span>

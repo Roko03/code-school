@@ -6,12 +6,17 @@ interface AdminUserListComponentProps {
   type: "-" | "adm" | "prof" | "stu";
   userList: null | UserType[];
   isLoading: boolean;
+  openModalByVariant: (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => void;
 }
 
 const AdminUserListComponent: React.FC<AdminUserListComponentProps> = ({
   type,
   userList,
   isLoading,
+  openModalByVariant,
 }) => {
   if (isLoading) {
     return <CircularProgressComponent />;
@@ -27,8 +32,22 @@ const AdminUserListComponent: React.FC<AdminUserListComponentProps> = ({
 
   return (
     <>
-      <AdminUserTableComponent userList={userList} type={type} />
-      <AdminUserListMobileComponent userList={userList} type={type} />
+      <AdminUserTableComponent
+        userList={userList}
+        type={type}
+        openModalByVariant={(
+          variant: "edit" | "delete",
+          userid: null | number
+        ) => openModalByVariant(variant, userid)}
+      />
+      <AdminUserListMobileComponent
+        userList={userList}
+        type={type}
+        openModalByVariant={(
+          variant: "edit" | "delete",
+          userid: null | number
+        ) => openModalByVariant(variant, userid)}
+      />
     </>
   );
 };
