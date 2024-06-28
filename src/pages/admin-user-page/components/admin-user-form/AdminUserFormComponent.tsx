@@ -10,14 +10,16 @@ export type TAdminUserSchema = z.infer<typeof adminUserFormSchema>;
 
 interface AdminUserFormComponentProps {
   variant: "add" | "edit";
-  user?: null | UserType;
+  user: null | UserType;
   editFunction?: (data: TAdminUserSchema) => void;
+  makeFunction?: (data: TAdminUserSchema) => void;
 }
 
 const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
   variant,
   user,
   editFunction,
+  makeFunction,
 }) => {
   const {
     register,
@@ -34,24 +36,35 @@ const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
     }
   };
 
+  const makeUser = (data: TAdminUserSchema) => {
+    if (makeFunction) {
+      makeFunction(data);
+    }
+  };
+
   const onSubmit = async (data: TAdminUserSchema) => {
     if (variant == "add") {
+      makeUser({ ...data, bio: data.bio != "" ? data.bio : null });
       reset();
       return;
     } else {
-      editUser(data);
+      editUser({ ...data, bio: data.bio != "" ? data.bio : null });
     }
   };
 
   useEffect(() => {
     if (user) {
-      if (user.bio == null) {
-        reset({ ...user, password: "", bio: "" });
-      } else {
-        reset({ ...user, password: "", bio: user.bio });
-      }
+      reset({ ...user, password: "", bio: user.bio ?? "" });
+    } else {
+      reset({
+        username: "",
+        email: "",
+        password: "",
+        bio: "",
+        role: "stu",
+      });
     }
-  }, [user]);
+  }, [user, reset]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.admin_user_form}>

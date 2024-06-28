@@ -13,6 +13,8 @@ import getUserById from "../../lib/user/getUserById";
 import editUserById from "../../lib/user/editUserById";
 import AdminUserDeleteComponent from "./components/admin-user-delete/AdminUserDeleteComponent";
 import deleteUserById from "../../lib/user/deleteUserById";
+import ButtonComponent from "../../components/button/ButtonComponent";
+import createUser from "../../lib/user/createUser";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -69,6 +71,12 @@ const AdminUserPageSection = () => {
     setTargetUser(response);
   };
 
+  const makeUser = async (data: TAdminUserSchema) => {
+    const response = await createUser(data);
+    closeDialogFunction();
+    fetchUsers();
+  };
+
   const editUser = async (data: TAdminUserSchema) => {
     if (targetUserId == null) {
       return;
@@ -106,7 +114,13 @@ const AdminUserPageSection = () => {
     }
 
     const formVariant: { [key in "add" | "edit" | "delete"]: ReactNode } = {
-      add: <AdminUserFormComponent variant={"add"} />,
+      add: (
+        <AdminUserFormComponent
+          variant={"add"}
+          user={null}
+          makeFunction={(data: TAdminUserSchema) => makeUser(data)}
+        />
+      ),
       edit: (
         <AdminUserFormComponent
           variant={"edit"}
@@ -136,6 +150,16 @@ const AdminUserPageSection = () => {
 
   return (
     <section className={styles.admin_users_section}>
+      <ButtonComponent
+        variant={"add"}
+        onClick={() => {
+          setIsModalOpen(true);
+          setModalVariant("add");
+          setTargetUserId(null);
+        }}
+      >
+        <p>Dodaj korisnika</p>
+      </ButtonComponent>
       <AdminUserRoleSelector
         value={roleSelected}
         onChange={(value: "-" | "adm" | "prof" | "stu") =>
