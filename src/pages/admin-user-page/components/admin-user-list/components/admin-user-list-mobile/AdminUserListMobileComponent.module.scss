@@ -23,8 +23,14 @@
     padding-top: rem(24);
     display: flex;
     justify-content: space-between;
-    gap: rem(48);
-    align-items: center;
+    gap: rem(24);
+    flex-direction: column;
+
+    @media screen and (min-width: rem(600)) {
+      flex-direction: row;
+      gap: rem(48);
+      align-items: center;
+    }
 
     &__data {
       display: flex;
@@ -49,6 +55,11 @@
     &__buttons {
       display: flex;
       gap: rem(8);
+
+      button {
+        width: rem(40);
+        height: rem(40);
+      }
     }
   }
 
