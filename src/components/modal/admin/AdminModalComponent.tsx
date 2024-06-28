@@ -19,8 +19,9 @@ const AdminModalComponent: React.FC<AdminModalComponentProps> = ({
   if (type == null) {
     return <></>;
   }
+  console.log(type);
 
-  const getModalStyleVariant = (type: ModalType) => {
+  const getModalStyleVariant = (type: ModalType): string => {
     const modalStyle: { [key in ModalType]: string } = {
       add: styles.add_modal,
       edit: styles.edit_modal,
@@ -32,7 +33,9 @@ const AdminModalComponent: React.FC<AdminModalComponentProps> = ({
 
   return (
     <DialogComponent closeDialog={closeDialog} isOpen={isOpen}>
-      <div className={`${getModalStyleVariant(type)}`}>{children}</div>
+      <div className={`${styles.modal} ${getModalStyleVariant(type)}`}>
+        {children}
+      </div>
     </DialogComponent>
   );
 };
