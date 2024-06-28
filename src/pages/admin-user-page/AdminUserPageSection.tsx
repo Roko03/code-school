@@ -7,8 +7,11 @@ import getAllUser from "../../lib/user/getAllUser";
 import filterUser from "../../lib/user/filterUser";
 import { number } from "zod";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
-import AdminUserFormComponent from "./components/admin-user-form/AdminUserFormComponent";
+import AdminUserFormComponent, {
+  TAdminUserSchema,
+} from "./components/admin-user-form/AdminUserFormComponent";
 import getUserById from "../../lib/user/getUserById";
+import editUserById from "../../lib/user/editUserById";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -29,6 +32,7 @@ const AdminUserPageSection = () => {
   const [targetUserId, setTargetUserId] = useState<null | number>(null);
 
   const [userList, setUserList] = useState<null | UserType[]>(null);
+
   const [targerUser, setTargetUser] = useState<null | UserType>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -58,6 +62,23 @@ const AdminUserPageSection = () => {
     setTargetUser(response);
   };
 
+  const editUser = async (data: TAdminUserSchema) => {
+    if (targetUserId == null) {
+      return;
+    }
+
+    const response = await editUserById(targetUserId, data);
+
+    if (!response.success) {
+      return;
+    }
+
+    setIsModalOpen(false);
+    setTargetUserId(null);
+    setTargetUser(null);
+    fetchUsers();
+  };
+
   const openModalByVariant = (
     variant: "edit" | "delete",
     userid: null | number
@@ -73,8 +94,14 @@ const AdminUserPageSection = () => {
     }
 
     const formVariant: { [key in "add" | "edit" | "delete"]: ReactNode } = {
-      add: <AdminUserFormComponent />,
-      edit: <AdminUserFormComponent user={targerUser} />,
+      add: <AdminUserFormComponent variant={"add"} />,
+      edit: (
+        <AdminUserFormComponent
+          variant={"edit"}
+          user={targerUser}
+          editFunction={(data: TAdminUserSchema) => editUser(data)}
+        />
+      ),
       delete: <></>,
     };
 

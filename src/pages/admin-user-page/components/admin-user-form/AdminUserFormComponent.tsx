@@ -9,11 +9,15 @@ import styles from "./AdminUserFormComponent.module.scss";
 export type TAdminUserSchema = z.infer<typeof adminUserFormSchema>;
 
 interface AdminUserFormComponentProps {
+  variant: "add" | "edit";
   user?: null | UserType;
+  editFunction?: (data: TAdminUserSchema) => void;
 }
 
 const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
+  variant,
   user,
+  editFunction,
 }) => {
   const {
     register,
@@ -24,10 +28,19 @@ const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
     resolver: zodResolver(adminUserFormSchema),
   });
 
-  const onSubmit = async (data: TAdminUserSchema) => {
-    console.log(data);
+  const editUser = (data: TAdminUserSchema) => {
+    if (user && editFunction) {
+      editFunction(data);
+    }
+  };
 
-    reset();
+  const onSubmit = async (data: TAdminUserSchema) => {
+    if (variant == "add") {
+      reset();
+      return;
+    } else {
+      editUser(data);
+    }
   };
 
   useEffect(() => {
