@@ -1,0 +1,19 @@
+@import "../../styles/main.scss";
+
+.snack_bar {
+  position: fixed;
+  z-index: 99999;
+  left: rem(24);
+  bottom: rem(24);
+
+  padding: rem(18) rem(24);
+  color: $white;
+}
+
+.snack_bar_success {
+  background-color: $green;
+}
+
+.snack_bar_error {
+  background-color: $red;
+}

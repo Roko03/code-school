@@ -15,6 +15,7 @@ import AdminUserDeleteComponent from "./components/admin-user-delete/AdminUserDe
 import deleteUserById from "../../lib/user/deleteUserById";
 import ButtonComponent from "../../components/button/ButtonComponent";
 import createUser from "../../lib/user/createUser";
+import SnackBarComponent from "../../components/snack-bar/SnackBarComponent";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -149,41 +150,44 @@ const AdminUserPageSection = () => {
   }, [targetUserId]);
 
   return (
-    <section className={styles.admin_users_section}>
-      <ButtonComponent
-        variant={"add"}
-        onClick={() => {
-          setIsModalOpen(true);
-          setModalVariant("add");
-          setTargetUserId(null);
-        }}
-      >
-        <img src={"/plus.svg"} alt="plus-image" />
-        <p>Dodaj korisnika</p>
-      </ButtonComponent>
-      <AdminUserRoleSelector
-        value={roleSelected}
-        onChange={(value: "-" | "adm" | "prof" | "stu") =>
-          setRoleSelected(value)
-        }
-      />
-      <AdminUserListComponent
-        type={query}
-        userList={userList}
-        isLoading={isLoading}
-        openModalByVariant={(
-          variant: "edit" | "delete",
-          userid: null | number
-        ) => openModalByVariant(variant, userid)}
-      />
-      <AdminModalComponent
-        isOpen={isModalOpen}
-        closeDialog={() => closeDialogFunction()}
-        type={modalVariant}
-      >
-        {getFormByModalVariant(modalVariant)}
-      </AdminModalComponent>
-    </section>
+    <>
+      <section className={styles.admin_users_section}>
+        <ButtonComponent
+          variant={"add"}
+          onClick={() => {
+            setIsModalOpen(true);
+            setModalVariant("add");
+            setTargetUserId(null);
+          }}
+        >
+          <img src={"/plus.svg"} alt="plus-image" />
+          <p>Dodaj korisnika</p>
+        </ButtonComponent>
+        <AdminUserRoleSelector
+          value={roleSelected}
+          onChange={(value: "-" | "adm" | "prof" | "stu") =>
+            setRoleSelected(value)
+          }
+        />
+        <AdminUserListComponent
+          type={query}
+          userList={userList}
+          isLoading={isLoading}
+          openModalByVariant={(
+            variant: "edit" | "delete",
+            userid: null | number
+          ) => openModalByVariant(variant, userid)}
+        />
+        <AdminModalComponent
+          isOpen={isModalOpen}
+          closeDialog={() => closeDialogFunction()}
+          type={modalVariant}
+        >
+          {getFormByModalVariant(modalVariant)}
+        </AdminModalComponent>
+      </section>
+      <SnackBarComponent variant={"success"} message={"Kralju"} />
+    </>
   );
 };
 
