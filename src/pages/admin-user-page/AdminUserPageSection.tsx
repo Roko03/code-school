@@ -28,6 +28,7 @@ const AdminUserPageSection = () => {
   const [targetUserId, setTargetUserId] = useState<null | number>(null);
 
   const [userList, setUserList] = useState<null | UserType[]>(null);
+  const [targerUser, setTargetUser] = useState<null | UserType>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchUsers = async () => {
@@ -61,7 +62,7 @@ const AdminUserPageSection = () => {
     }
 
     const formVariant: { [key in "add" | "edit" | "delete"]: ReactNode } = {
-      add: <></>,
+      add: <AdminUserFormComponent />,
       edit: <AdminUserFormComponent />,
       delete: <></>,
     };
@@ -95,6 +96,7 @@ const AdminUserPageSection = () => {
         closeDialog={() => {
           setIsModalOpen(false);
           setTargetUserId(null);
+          setTargetUser(null);
           setModalVariant(null);
         }}
         type={modalVariant}

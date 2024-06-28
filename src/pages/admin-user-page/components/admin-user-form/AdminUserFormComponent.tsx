@@ -3,10 +3,17 @@ import { adminUserFormSchema } from "../../../../types/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ButtonComponent from "../../../../components/button/ButtonComponent";
+import { useEffect } from "react";
 
 export type TAdminUserSchema = z.infer<typeof adminUserFormSchema>;
 
-const AdminUserFormComponent = () => {
+interface AdminUserFormComponentProps {
+  user?: UserType;
+}
+
+const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
+  user,
+}) => {
   const {
     register,
     handleSubmit,
@@ -21,6 +28,16 @@ const AdminUserFormComponent = () => {
 
     reset();
   };
+
+  useEffect(() => {
+    if (user) {
+      if (user.bio == null) {
+        reset({ ...user, password: "", bio: "" });
+      } else {
+        reset({ ...user, password: "", bio: user.bio });
+      }
+    }
+  }, [user]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
