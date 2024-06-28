@@ -44,30 +44,42 @@ const AdminUserListMobileComponent: React.FC<
 
     return (
       <>
-        <h1>Admin</h1>
-        <AdminUserListByRoleComponent
-          userList={adminList}
-          openModalByVariant={(
-            variant: "edit" | "delete",
-            userid: null | number
-          ) => openModalByVariant(variant, userid)}
-        />
-        <h1>Profesori</h1>
-        <AdminUserListByRoleComponent
-          userList={professorList}
-          openModalByVariant={(
-            variant: "edit" | "delete",
-            userid: null | number
-          ) => openModalByVariant(variant, userid)}
-        />
-        <h1>Studenti</h1>
-        <AdminUserListByRoleComponent
-          userList={studentList}
-          openModalByVariant={(
-            variant: "edit" | "delete",
-            userid: null | number
-          ) => openModalByVariant(variant, userid)}
-        />
+        {adminList.length > 0 && (
+          <>
+            <h1>Admin</h1>
+            <AdminUserListByRoleComponent
+              userList={adminList}
+              openModalByVariant={(
+                variant: "edit" | "delete",
+                userid: null | number
+              ) => openModalByVariant(variant, userid)}
+            />
+          </>
+        )}
+        {professorList.length > 0 && (
+          <>
+            <h1>Profesori</h1>
+            <AdminUserListByRoleComponent
+              userList={professorList}
+              openModalByVariant={(
+                variant: "edit" | "delete",
+                userid: null | number
+              ) => openModalByVariant(variant, userid)}
+            />
+          </>
+        )}
+        {studentList.length > 0 && (
+          <>
+            <h1>Studenti</h1>
+            <AdminUserListByRoleComponent
+              userList={studentList}
+              openModalByVariant={(
+                variant: "edit" | "delete",
+                userid: null | number
+              ) => openModalByVariant(variant, userid)}
+            />
+          </>
+        )}
       </>
     );
   };
