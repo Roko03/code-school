@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import styles from "./AdminUserPageSection.module.scss";
 import AdminUserRoleSelector from "./components/admin-user-role-selector/AdminUserRoleSelector";
 import { useSearchParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import getAllUser from "../../lib/user/getAllUser";
 import filterUser from "../../lib/user/filterUser";
 import { number } from "zod";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
+import AdminUserFormComponent from "./components/admin-user-form/AdminUserFormComponent";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -54,6 +55,20 @@ const AdminUserPageSection = () => {
     setTargetUserId(userid);
   };
 
+  const getFormByModalVariant = (type: null | "add" | "edit" | "delete") => {
+    if (type == null) {
+      return <></>;
+    }
+
+    const formVariant: { [key in "add" | "edit" | "delete"]: ReactNode } = {
+      add: <></>,
+      edit: <AdminUserFormComponent />,
+      delete: <></>,
+    };
+
+    return formVariant[type];
+  };
+
   useEffect(() => {
     fetchUsers();
   }, [query]);
@@ -84,7 +99,7 @@ const AdminUserPageSection = () => {
         }}
         type={modalVariant}
       >
-        <div>{targetUserId}</div>
+        {getFormByModalVariant(modalVariant)}
       </AdminModalComponent>
     </section>
   );
