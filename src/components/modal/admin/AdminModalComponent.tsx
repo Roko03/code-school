@@ -19,7 +19,6 @@ const AdminModalComponent: React.FC<AdminModalComponentProps> = ({
   if (type == null) {
     return <></>;
   }
-  console.log(type);
 
   const getModalStyleVariant = (type: ModalType): string => {
     const modalStyle: { [key in ModalType]: string } = {

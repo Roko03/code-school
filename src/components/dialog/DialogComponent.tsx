@@ -29,7 +29,7 @@ const DialogComponent: React.FC<DialogComponentProps> = ({
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen == true) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "auto";

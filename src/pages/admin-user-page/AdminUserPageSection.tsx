@@ -63,7 +63,7 @@ const AdminUserPageSection = () => {
 
     const formVariant: { [key in "add" | "edit" | "delete"]: ReactNode } = {
       add: <AdminUserFormComponent />,
-      edit: <AdminUserFormComponent />,
+      edit: <AdminUserFormComponent user={targerUser} />,
       delete: <></>,
     };
 
@@ -97,7 +97,6 @@ const AdminUserPageSection = () => {
           setIsModalOpen(false);
           setTargetUserId(null);
           setTargetUser(null);
-          setModalVariant(null);
         }}
         type={modalVariant}
       >

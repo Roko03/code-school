@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ButtonComponent from "../../../../components/button/ButtonComponent";
 import { useEffect } from "react";
+import styles from "./AdminUserFormComponent.module.scss";
 
 export type TAdminUserSchema = z.infer<typeof adminUserFormSchema>;
 
 interface AdminUserFormComponentProps {
-  user?: UserType;
+  user?: null | UserType;
 }
 
 const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
@@ -40,7 +41,7 @@ const AdminUserFormComponent: React.FC<AdminUserFormComponentProps> = ({
   }, [user]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.admin_user_form}>
       <label>
         <input
           type="text"
