@@ -12,6 +12,7 @@ import AdminUserFormComponent, {
 import getUserById from "../../lib/user/getUserById";
 import editUserById from "../../lib/user/editUserById";
 import AdminUserDeleteComponent from "./components/admin-user-delete/AdminUserDeleteComponent";
+import deleteUserById from "../../lib/user/deleteUserById";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -75,9 +76,16 @@ const AdminUserPageSection = () => {
 
     const response = await editUserById(targetUserId, data);
 
-    if (!response.success) {
+    closeDialogFunction();
+    fetchUsers();
+  };
+
+  const deleteUser = async () => {
+    if (targetUserId == null) {
       return;
     }
+
+    const response = await deleteUserById(targetUserId);
 
     closeDialogFunction();
     fetchUsers();
@@ -110,6 +118,7 @@ const AdminUserPageSection = () => {
         <AdminUserDeleteComponent
           closeDialog={() => closeDialogFunction()}
           user={targerUser}
+          deleteFunction={() => deleteUser()}
         />
       ),
     };

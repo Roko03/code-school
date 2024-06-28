@@ -4,11 +4,13 @@ import styles from "./AdminUserDeleteComponent.module.scss";
 interface AdminUserDeleteComponentProps {
   closeDialog: () => void;
   user: UserType | null;
+  deleteFunction: () => void;
 }
 
 const AdminUserDeleteComponent: React.FC<AdminUserDeleteComponentProps> = ({
   closeDialog,
   user,
+  deleteFunction,
 }) => {
   if (user == null) {
     return;
@@ -22,7 +24,7 @@ const AdminUserDeleteComponent: React.FC<AdminUserDeleteComponentProps> = ({
         <ButtonComponent variant={"add"} onClick={() => closeDialog()}>
           <p>Vrati</p>
         </ButtonComponent>
-        <ButtonComponent variant={"delete"}>
+        <ButtonComponent variant={"delete"} onClick={deleteFunction}>
           <p>Izbriši</p>
         </ButtonComponent>
       </div>
