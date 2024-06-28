@@ -53,8 +53,6 @@ const AdminUserListComponent: React.FC<AdminUserListComponentProps> = ({
     setIsLoading(false);
   };
 
-  console.log(userList);
-
   useEffect(() => {
     fetchUsers();
   }, [type]);
