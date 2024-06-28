@@ -11,7 +11,9 @@ export default async function editUserById(userId: number, data: TAdminUserSchem
         body: JSON.stringify(data)
     })
 
-    if (!response.ok) return { success: false }
+    if (!response.ok) return { success: false, message: "Nije moguće urediti korisnika" }
 
-    return await response.json()
+    let jsonData = await response.json()
+
+    return { success: true, message: "Korisnik uspješno uređen", data: jsonData }
 }

@@ -9,7 +9,9 @@ export default async function createUser(data: TAdminUserSchema) {
         body: JSON.stringify(data)
     })
 
-    if (!response.ok) return { success: false }
+    if (!response.ok) return { success: false, message: "Nije moguće kreirati korisnika" }
 
-    return await response.json()
+    let jsonData = await response.json()
+
+    return { success: true, message: "Uspjepno kreiran korisnik", data: jsonData }
 }

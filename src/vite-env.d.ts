@@ -7,3 +7,9 @@ type UserType = {
     bio: string | null;
     role: 'adm' | 'stu' | 'prof';
 }
+
+type SnackBarType = {
+    isOpen: boolean;
+    message: string | null;
+    type: "error" | "success" | null
+}

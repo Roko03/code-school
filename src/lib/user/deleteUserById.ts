@@ -9,7 +9,9 @@ export default async function deleteUserById(userId: number,) {
         },
     })
 
-    if (!response.ok) return { success: false }
+    if (!response.ok) return { success: false, message: "Nije moguće izbrisati korisnika" }
 
-    return await response.json()
+    let jsonData = await response.json()
+
+    return { success: true, message: "Korisnik uspješno izbrisan", data: jsonData }
 }

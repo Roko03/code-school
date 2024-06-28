@@ -38,12 +38,36 @@ const AdminUserPageSection = () => {
   const [userList, setUserList] = useState<null | UserType[]>(null);
 
   const [targerUser, setTargetUser] = useState<null | UserType>(null);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [snackBar, setSnackBar] = useState<SnackBarType>({
+    isOpen: false,
+    message: null,
+    type: null,
+  });
 
   const closeDialogFunction = () => {
     setIsModalOpen(false);
     setTargetUserId(null);
     setTargetUser(null);
+  };
+
+  const closeSnackBarComponent = () => {
+    setSnackBar((prev) => {
+      return {
+        ...prev,
+        isOpen: false,
+      };
+    });
+  };
+
+  const openSnackBar = (type: "error" | "success", message: string) => {
+    setSnackBar({
+      isOpen: true,
+      message: message,
+      type: type,
+    });
   };
 
   const fetchUsers = async () => {
@@ -74,6 +98,13 @@ const AdminUserPageSection = () => {
 
   const makeUser = async (data: TAdminUserSchema) => {
     const response = await createUser(data);
+
+    if (!response.success) {
+      openSnackBar("error", response.message);
+      return;
+    }
+
+    openSnackBar("success", response.message);
     closeDialogFunction();
     fetchUsers();
   };
@@ -85,6 +116,12 @@ const AdminUserPageSection = () => {
 
     const response = await editUserById(targetUserId, data);
 
+    if (!response.success) {
+      openSnackBar("error", response.message);
+      return;
+    }
+
+    openSnackBar("success", response.message);
     closeDialogFunction();
     fetchUsers();
   };
@@ -96,6 +133,12 @@ const AdminUserPageSection = () => {
 
     const response = await deleteUserById(targetUserId);
 
+    if (!response.success) {
+      openSnackBar("error", response.message);
+      return;
+    }
+
+    openSnackBar("success", response.message);
     closeDialogFunction();
     fetchUsers();
   };
@@ -186,7 +229,12 @@ const AdminUserPageSection = () => {
           {getFormByModalVariant(modalVariant)}
         </AdminModalComponent>
       </section>
-      <SnackBarComponent variant={"success"} message={"Kralju"} />
+      <SnackBarComponent
+        variant={snackBar.type}
+        message={snackBar.message}
+        isVisible={snackBar.isOpen}
+        closeSnackBar={() => closeSnackBarComponent()}
+      />
     </>
   );
 };
