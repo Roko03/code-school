@@ -16,5 +16,7 @@
 
 .delete_modal {
   width: 60vw;
+  max-width: rem(360);
+  max-height: rem(320);
   height: 50vh;
 }
