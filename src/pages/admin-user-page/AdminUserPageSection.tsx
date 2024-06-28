@@ -6,6 +6,7 @@ import AdminUserListComponent from "./components/admin-user-list/AdminUserListCo
 import getAllUser from "../../lib/user/getAllUser";
 import filterUser from "../../lib/user/filterUser";
 import { number } from "zod";
+import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 
 const AdminUserPageSection = () => {
   const [searchParams] = useSearchParams();
@@ -74,7 +75,17 @@ const AdminUserPageSection = () => {
           userid: null | number
         ) => openModalByVariant(variant, userid)}
       />
-      {isModalOpen && <div>EJ</div>}
+      <AdminModalComponent
+        isOpen={isModalOpen}
+        closeDialog={() => {
+          setIsModalOpen(false);
+          setTargetUserId(null);
+          setModalVariant(null);
+        }}
+        type={modalVariant}
+      >
+        <div>{targetUserId}</div>
+      </AdminModalComponent>
     </section>
   );
 };
