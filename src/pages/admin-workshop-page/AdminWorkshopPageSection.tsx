@@ -13,6 +13,7 @@ import getProfessor from "../../lib/user/getProfessor";
 import createWorkshop from "../../lib/workshop/createWorkshop";
 import editOrganizationById from "../../lib/organization/editOrganizationById";
 import editWorkshopById from "../../lib/workshop/editWorkshopById";
+import AdminWorkshopDeleteComponent from "./components/admin-workshop-delete/AdminWorkshopDeleteComponent";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -121,7 +122,13 @@ const AdminWorkshopPageSection = () => {
             }
           />
         ),
-        delete: <></>,
+        delete: (
+          <AdminWorkshopDeleteComponent
+            workshop={targetWorkshop}
+            closeDialog={closeModal}
+            deleteFunction={() => {}}
+          />
+        ),
       };
 
     return containerVariant[variant];
