@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import styles from "./AdminOrganizationPageSection.module.scss";
 import AdminOrganizationListComponent from "./components/admin-organization-list/AdminOrganizationListComponent";
 import getAllOrganizations from "../../lib/organization/getAllOrganization";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import { number } from "zod";
 import getOrganizationById from "../../lib/organization/getOrganizationById";
+import AdminOrganizationDetailComponent from "./components/admin-organization-detail/AdminOrganizationDetailComponent";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -56,6 +57,27 @@ const AdminOrganizationPageSection = () => {
     setTargetOrganization(null);
   };
 
+  const getContainerByModalVariant = (
+    type: null | "add" | "edit" | "delete" | "detail"
+  ) => {
+    if (type == null) {
+      return <></>;
+    }
+
+    const containerVariant: {
+      [key in "add" | "edit" | "delete" | "detail"]: ReactNode;
+    } = {
+      add: <></>,
+      edit: <></>,
+      delete: <></>,
+      detail: (
+        <AdminOrganizationDetailComponent organization={targetOrganization} />
+      ),
+    };
+
+    return containerVariant[type];
+  };
+
   useEffect(() => {
     fetchOrganizations();
   }, []);
@@ -82,7 +104,7 @@ const AdminOrganizationPageSection = () => {
         isOpen={isModalOpen}
         closeDialog={closeModal}
       >
-        <p>Ej</p>
+        {getContainerByModalVariant(modalVariant)}
       </AdminModalComponent>
     </>
   );

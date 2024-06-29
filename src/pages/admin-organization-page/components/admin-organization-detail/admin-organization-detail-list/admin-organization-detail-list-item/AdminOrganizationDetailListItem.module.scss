@@ -1,0 +1,14 @@
+@import "../../../../../../styles/main.scss";
+
+.admin_organization_user_list_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: rem(24);
+  align-items: center;
+  padding: rem(18) 0;
+}
+
+.admin_organization_user_list_item + .admin_organization_user_list_item {
+  border-top: rem(2) solid rgba($black, 0.2);
+}
