@@ -5,11 +5,16 @@ import AdminWorkshopListItem from "./admin-workshop-list-item/AdminWorkshopListI
 interface AdminWorkshopListComponentProps {
   workshopList: null | WorkshopType[];
   isLoading: boolean;
+  openModalByVariant: (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => void;
 }
 
 const AdminWorkshopListComponent: React.FC<AdminWorkshopListComponentProps> = ({
   workshopList,
   isLoading,
+  openModalByVariant,
 }) => {
   if (isLoading) return <CircularProgressComponent />;
 
@@ -20,7 +25,16 @@ const AdminWorkshopListComponent: React.FC<AdminWorkshopListComponentProps> = ({
   return (
     <div className={styles.admin_workshop_list}>
       {workshopList.map((workshop) => {
-        return <AdminWorkshopListItem key={workshop.id} workshop={workshop} />;
+        return (
+          <AdminWorkshopListItem
+            key={workshop.id}
+            workshop={workshop}
+            openModalByVariant={(
+              variant: "edit" | "delete",
+              workshopId: null | number
+            ) => openModalByVariant(variant, workshopId)}
+          />
+        );
       })}
     </div>
   );

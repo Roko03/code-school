@@ -5,23 +5,34 @@ import styles from "./AdminWorkshopListItem.module.scss";
 
 interface AdminWorkshopListItemProps {
   workshop: WorkshopType;
+  openModalByVariant: (
+    variant: "edit" | "delete",
+    userid: null | number
+  ) => void;
 }
 
 const AdminWorkshopListItem: React.FC<AdminWorkshopListItemProps> = ({
   workshop,
+  openModalByVariant,
 }) => {
   return (
     <div className={styles.workshop_item}>
       <div className={styles.workshop_item__image}>
         <img src={"/background-banner.png"} alt={`${workshop.name}-image`} />
         <div className={styles.workshop_item__buttons}>
-          <ButtonComponent variant={"adminEdit"} onClick={() => {}}>
+          <ButtonComponent
+            variant={"adminEdit"}
+            onClick={() => openModalByVariant("edit", workshop.id)}
+          >
             <img src={"/pencil.svg"} alt="edit" />
             <span>
               <p>Edit</p>
             </span>
           </ButtonComponent>
-          <ButtonComponent variant={"adminTrash"} onClick={() => {}}>
+          <ButtonComponent
+            variant={"adminTrash"}
+            onClick={() => openModalByVariant("delete", workshop.id)}
+          >
             <img src={"/trash.svg"} alt="trash" />
             <span>
               <p>Trash</p>
