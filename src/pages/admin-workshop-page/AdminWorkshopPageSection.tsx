@@ -14,6 +14,7 @@ import createWorkshop from "../../lib/workshop/createWorkshop";
 import editOrganizationById from "../../lib/organization/editOrganizationById";
 import editWorkshopById from "../../lib/workshop/editWorkshopById";
 import AdminWorkshopDeleteComponent from "./components/admin-workshop-delete/AdminWorkshopDeleteComponent";
+import deleteWorkshopById from "../../lib/workshop/deleteWorkshopById";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -93,6 +94,21 @@ const AdminWorkshopPageSection = () => {
     closeModal();
   };
 
+  const deleteWorkshopFunction = async () => {
+    if (targetWorkshopId == null) {
+      return;
+    }
+
+    const response = await deleteWorkshopById(targetWorkshopId);
+
+    if (!response.success) {
+      return;
+    }
+
+    fetchData();
+    closeModal();
+  };
+
   const getModalContainerByVariant = (
     variant: null | "add" | "edit" | "delete"
   ) => {
@@ -126,7 +142,7 @@ const AdminWorkshopPageSection = () => {
           <AdminWorkshopDeleteComponent
             workshop={targetWorkshop}
             closeDialog={closeModal}
-            deleteFunction={() => {}}
+            deleteFunction={deleteWorkshopFunction}
           />
         ),
       };
