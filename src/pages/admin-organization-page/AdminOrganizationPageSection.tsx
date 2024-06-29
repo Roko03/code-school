@@ -12,6 +12,7 @@ import editOrganizationById from "../../lib/organization/editOrganizationById";
 import ButtonComponent from "../../components/button/ButtonComponent";
 import createOrganization from "../../lib/organization/createOrganization";
 import AdminOrganizationDeleteComponent from "./components/admin-organization-delete/AdminOrganizationDeleteComponent";
+import deleteOrganizationById from "../../lib/organization/deleteOrganizationById";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -89,6 +90,21 @@ const AdminOrganizationPageSection = () => {
     fetchOrganizations();
   };
 
+  const deleteOrganizationFunction = async () => {
+    if (targetId == null) {
+      return;
+    }
+
+    const response = await deleteOrganizationById(targetId);
+
+    if (!response.success) {
+      return;
+    }
+
+    closeModal();
+    fetchOrganizations();
+  };
+
   const getContainerByModalVariant = (
     type: null | "add" | "edit" | "delete" | "detail"
   ) => {
@@ -121,7 +137,7 @@ const AdminOrganizationPageSection = () => {
         <AdminOrganizationDeleteComponent
           organization={targetOrganization}
           closeDialog={closeModal}
-          deleteFunction={() => {}}
+          deleteFunction={deleteOrganizationFunction}
         />
       ),
       detail: (

@@ -1,8 +1,8 @@
 import { ACCESS_TOKEN } from "../../constants"
 import { TAdminOrganizationSchema } from "../../pages/admin-organization-page/components/admin-organization-form/AdminOrganizationFormComponent"
 
-export default async function editOrganizationById(data: TAdminOrganizationSchema, userid: number) {
-    const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACK_BASE_URL}/api/organization/${userid}/`, {
+export default async function editOrganizationById(data: TAdminOrganizationSchema, organizationId: number) {
+    const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACK_BASE_URL}/api/organization/${organizationId}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
