@@ -4,6 +4,7 @@ import AdminOrganizationListComponent from "./components/admin-organization-list
 import getAllOrganizations from "../../lib/organization/getAllOrganization";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import { number } from "zod";
+import getOrganizationById from "../../lib/organization/getOrganizationById";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -16,16 +17,28 @@ const AdminOrganizationPageSection = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [targetId, setTargetId] = useState<null | number>(null);
+  const [targetOrganization, setTargetOrganization] =
+    useState<null | OrganizationType>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchOrganization = async () => {
+  const fetchOrganizations = async () => {
     setIsLoading(true);
 
-    const respose = await getAllOrganizations();
+    const response = await getAllOrganizations();
 
-    setOrganizationList(respose);
+    setOrganizationList(response);
     setIsLoading(false);
+  };
+
+  const fetchOrganization = async () => {
+    if (targetId == null) {
+      return;
+    }
+
+    const response = await getOrganizationById(targetId);
+
+    setTargetOrganization(response);
   };
 
   const openModalByVariant = (
@@ -37,9 +50,19 @@ const AdminOrganizationPageSection = () => {
     setTargetId(userid);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTargetId(null);
+    setTargetOrganization(null);
+  };
+
+  useEffect(() => {
+    fetchOrganizations();
+  }, []);
+
   useEffect(() => {
     fetchOrganization();
-  }, []);
+  }, [targetId]);
 
   return (
     <>
@@ -57,7 +80,7 @@ const AdminOrganizationPageSection = () => {
       <AdminModalComponent
         type={modalVariant}
         isOpen={isModalOpen}
-        closeDialog={() => setIsModalOpen(false)}
+        closeDialog={closeModal}
       >
         <p>Ej</p>
       </AdminModalComponent>
