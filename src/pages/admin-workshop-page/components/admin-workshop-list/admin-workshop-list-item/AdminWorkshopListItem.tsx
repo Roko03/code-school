@@ -1,4 +1,5 @@
 import ButtonComponent from "../../../../../components/button/ButtonComponent";
+import { formatDate } from "../../../../../util/formatDate";
 import styles from "./AdminWorkshopListItem.module.scss";
 
 interface AdminWorkshopListItemProps {
@@ -31,7 +32,7 @@ const AdminWorkshopListItem: React.FC<AdminWorkshopListItemProps> = ({
         <div className={styles.workshop_item__info__top}>
           <h2>{workshop.name}</h2>
           <span>{workshop.user_id}</span>
-          <p>{workshop.time}</p>
+          <p>{formatDate(workshop.time)}</p>
           <p>{workshop.info}</p>
           <span className={styles.workshop_item__info__top__level}>
             {workshop.level}
