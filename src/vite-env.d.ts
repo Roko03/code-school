@@ -20,3 +20,17 @@ type OrganizationType = {
     info: string;
     numb_of_users: number;
 }
+
+type Level = 'jun' | 'mid' | 'sen'
+
+type Subject = 'rjs' | 'ex' | 'njs';
+
+type WorkshopType = {
+    id: number;
+    name: string;
+    time: string;
+    info: string;
+    level: Level;
+    subject: Subject;
+    user_id: number;
+}
