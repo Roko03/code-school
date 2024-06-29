@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import getAllWorkshop from "../../lib/workshop/getAllWorkshop";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import { number } from "zod";
+import getWorkshopById from "../../lib/workshop/getWorkshopById";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -15,6 +16,9 @@ const AdminWorkshopPageSection = () => {
   >(null);
 
   const [targetWorkshopId, setTargetWorkshopId] = useState<null | number>(null);
+  const [targetWorkshop, setTargetWorkshop] = useState<null | WorkshopType>(
+    null
+  );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -42,9 +46,22 @@ const AdminWorkshopPageSection = () => {
     setIsLoading(false);
   };
 
+  const fetchWorkshop = async () => {
+    if (targetWorkshopId == null) {
+      return;
+    }
+    const response = await getWorkshopById(targetWorkshopId);
+
+    setTargetWorkshop(response);
+  };
+
   useEffect(() => {
     fetchWorkshops();
   }, []);
+
+  useEffect(() => {
+    fetchWorkshop();
+  }, [targetWorkshopId]);
 
   return (
     <>
