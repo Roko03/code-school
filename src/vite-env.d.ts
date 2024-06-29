@@ -13,3 +13,9 @@ type SnackBarType = {
     message: string | null;
     type: "error" | "success" | null
 }
+
+type OrganizationType = {
+    id: number,
+    name: string;
+    info: string;
+}
