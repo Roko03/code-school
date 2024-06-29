@@ -1,0 +1,17 @@
+@import "../../../../styles/main.scss";
+
+.admin_organization_detail {
+  padding-top: rem(12);
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+
+  @include breakpoint(medium) {
+    gap: rem(24);
+  }
+
+  h2 {
+    font-size: rem(24);
+    font-weight: 600;
+  }
+}

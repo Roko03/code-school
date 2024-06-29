@@ -1,7 +1,7 @@
 import DialogComponent from "../../dialog/DialogComponent";
 import styles from "./AdminModalComponent.module.scss";
 
-type ModalType = "add" | "edit" | "delete";
+type ModalType = "add" | "edit" | "delete" | "detail";
 
 interface AdminModalComponentProps {
   isOpen: boolean;
@@ -25,6 +25,7 @@ const AdminModalComponent: React.FC<AdminModalComponentProps> = ({
       add: styles.add_modal,
       edit: styles.edit_modal,
       delete: styles.delete_modal,
+      detail: styles.detail_modal,
     };
 
     return modalStyle[type];

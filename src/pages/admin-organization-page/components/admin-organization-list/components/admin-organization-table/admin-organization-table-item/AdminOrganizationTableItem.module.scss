@@ -1,0 +1,15 @@
+@import "../../../../../../../styles/main.scss";
+
+.td_button_entry {
+  vertical-align: middle;
+
+  .table_link {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: rem(18);
+    color: $blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
