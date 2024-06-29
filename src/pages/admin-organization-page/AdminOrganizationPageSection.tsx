@@ -1,29 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AdminOrganizationPageSection.module.scss";
 import AdminOrganizationListComponent from "./components/admin-organization-list/AdminOrganizationListComponent";
+import getAllOrganizations from "../../lib/organization/getAllOrganization";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
     null | OrganizationType[]
-  >([
-    {
-      id: 1,
-      name: "Organizacija",
-      info: "Organizacija info",
-      numb_of_users: 2,
-    },
-    {
-      id: 2,
-      name: "Organizacija",
-      info: "Organizacija info",
-      numb_of_users: 3,
-    },
-  ]);
+  >(null);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetchOrganization = async () => {
+    setIsLoading(true);
+
+    const respose = await getAllOrganizations();
+
+    setOrganizationList(respose);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchOrganization();
+  }, []);
 
   return (
     <section className={styles.organization_section}>
       <h1>Organizacije</h1>
-      <AdminOrganizationListComponent organizationList={organizationList} />
+      <AdminOrganizationListComponent
+        isLoading={isLoading}
+        organizationList={organizationList}
+      />
     </section>
   );
 };
