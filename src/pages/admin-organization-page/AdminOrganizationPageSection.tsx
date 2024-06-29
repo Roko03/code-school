@@ -3,13 +3,14 @@ import styles from "./AdminOrganizationPageSection.module.scss";
 import AdminOrganizationListComponent from "./components/admin-organization-list/AdminOrganizationListComponent";
 import getAllOrganizations from "../../lib/organization/getAllOrganization";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
-import { number } from "zod";
 import getOrganizationById from "../../lib/organization/getOrganizationById";
 import AdminOrganizationDetailComponent from "./components/admin-organization-detail/AdminOrganizationDetailComponent";
 import AdminOrganizationFormComponent, {
   TAdminOrganizationSchema,
 } from "./components/admin-organization-form/AdminOrganizationFormComponent";
 import editOrganizationById from "../../lib/organization/editOrganizationById";
+import ButtonComponent from "../../components/button/ButtonComponent";
+import createOrganization from "../../lib/organization/createOrganization";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -76,6 +77,17 @@ const AdminOrganizationPageSection = () => {
     fetchOrganizations();
   };
 
+  const makeOrganizationFunction = async (data: TAdminOrganizationSchema) => {
+    const response = await createOrganization(data);
+
+    if (!response.success) {
+      return;
+    }
+
+    closeModal();
+    fetchOrganizations();
+  };
+
   const getContainerByModalVariant = (
     type: null | "add" | "edit" | "delete" | "detail"
   ) => {
@@ -87,13 +99,21 @@ const AdminOrganizationPageSection = () => {
       [key in "add" | "edit" | "delete" | "detail"]: ReactNode;
     } = {
       add: (
-        <AdminOrganizationFormComponent variant={"edit"} organization={null} />
+        <AdminOrganizationFormComponent
+          variant={"add"}
+          organization={null}
+          makeFunction={(data: TAdminOrganizationSchema) =>
+            makeOrganizationFunction(data)
+          }
+        />
       ),
       edit: (
         <AdminOrganizationFormComponent
           variant={"edit"}
           organization={targetOrganization}
-          editFunction={editOrganizationFunction}
+          editFunction={(data: TAdminOrganizationSchema) =>
+            editOrganizationFunction(data)
+          }
         />
       ),
       delete: <></>,
@@ -116,7 +136,15 @@ const AdminOrganizationPageSection = () => {
   return (
     <>
       <section className={styles.organization_section}>
-        <h1>Organizacije</h1>
+        <ButtonComponent
+          variant={"add"}
+          onClick={() => {
+            setIsModalOpen(true);
+            setModalVariant("add");
+          }}
+        >
+          <p>Dodaj organizaciju</p>
+        </ButtonComponent>
         <AdminOrganizationListComponent
           isLoading={isLoading}
           organizationList={organizationList}

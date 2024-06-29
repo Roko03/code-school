@@ -31,7 +31,7 @@ const AdminOrganizationFormComponent: React.FC<
 
   const onSubmit = async (data: TAdminOrganizationSchema) => {
     if (variant == "add") {
-      console.log(data);
+      if (makeFunction) makeFunction(data);
       reset();
     } else {
       if (editFunction) editFunction(data);
