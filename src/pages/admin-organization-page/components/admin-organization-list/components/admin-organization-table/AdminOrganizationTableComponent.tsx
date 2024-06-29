@@ -14,6 +14,7 @@ const AdminOrganizationTableComponent: React.FC<
         <tr>
           <th>Naziv organizacije</th>
           <th>Info</th>
+          <th>Broj pripadnika</th>
           <th></th>
           <th></th>
           <th></th>

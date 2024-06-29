@@ -1,3 +1,4 @@
+import AdminOrganizationMobileListComponent from "./components/admin-organization-list-mobile/AdminOrganizationMobileListComponent";
 import AdminOrganizationTableComponent from "./components/admin-organization-table/AdminOrganizationTableComponent";
 
 interface AdminOrganizationListComponentProps {
@@ -12,6 +13,9 @@ const AdminOrganizationListComponent: React.FC<
   }
   return (
     <>
+      <AdminOrganizationMobileListComponent
+        organizationList={organizationList}
+      />
       <AdminOrganizationTableComponent organizationList={organizationList} />
     </>
   );
