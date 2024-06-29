@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AdminOrganizationDetailComponent.module.scss";
 import AdminOrganizationDetailList from "./admin-organization-detail-list/AdminOrganizationDetailList";
+import getUserByOrganization from "../../../../lib/organization/getUserByOrganization";
 
 interface AdminOrganizationDetailComponentProps {
   organization: OrganizationType | null;
@@ -11,22 +12,21 @@ const AdminOrganizationDetailComponent: React.FC<
 > = ({ organization }) => {
   const [organizationUserList, setOrganizationUserList] = useState<
     null | UserType[]
-  >([
-    {
-      id: 2,
-      username: "Jakov",
-      email: "jakov@gmail.com",
-      bio: "Jakov biografija1",
-      role: "prof",
-    },
-    {
-      id: 15,
-      username: "karlo",
-      email: "karlo@gmail.com",
-      bio: null,
-      role: "prof",
-    },
-  ]);
+  >(null);
+
+  const fetchUserByOrganization = async () => {
+    if (organization == null) {
+      return;
+    }
+
+    const response = await getUserByOrganization(organization.id);
+
+    setOrganizationUserList(response);
+  };
+
+  useEffect(() => {
+    fetchUserByOrganization();
+  }, [organization]);
 
   if (organization == null) {
     return <></>;

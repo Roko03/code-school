@@ -7,6 +7,7 @@
   gap: rem(24);
   align-items: center;
   padding: rem(18) 0;
+  flex-wrap: wrap;
 }
 
 .admin_organization_user_list_item + .admin_organization_user_list_item {
