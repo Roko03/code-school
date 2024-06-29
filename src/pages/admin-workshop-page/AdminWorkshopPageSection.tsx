@@ -13,6 +13,7 @@ import createWorkshop from "../../lib/workshop/createWorkshop";
 import editWorkshopById from "../../lib/workshop/editWorkshopById";
 import AdminWorkshopDeleteComponent from "./components/admin-workshop-delete/AdminWorkshopDeleteComponent";
 import deleteWorkshopById from "../../lib/workshop/deleteWorkshopById";
+import SnackBarComponent from "../../components/snack-bar/SnackBarComponent";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -29,6 +30,29 @@ const AdminWorkshopPageSection = () => {
   );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [snackBar, setSnackBar] = useState<SnackBarType>({
+    isOpen: false,
+    message: null,
+    type: null,
+  });
+
+  const closeSnackBarComponent = () => {
+    setSnackBar((prev) => {
+      return {
+        ...prev,
+        isOpen: false,
+      };
+    });
+  };
+
+  const openSnackBar = (type: "error" | "success", message: string) => {
+    setSnackBar({
+      isOpen: true,
+      message: message,
+      type: type,
+    });
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -70,11 +94,13 @@ const AdminWorkshopPageSection = () => {
     const response = await createWorkshop(data);
 
     if (!response.success) {
+      openSnackBar("error", response.message);
       return;
     }
 
     fetchData();
     closeModal();
+    openSnackBar("success", response.message);
   };
 
   const editWorkshopFunciton = async (data: TAdminWorkshopSchema) => {
@@ -85,11 +111,13 @@ const AdminWorkshopPageSection = () => {
     const response = await editWorkshopById(data, targetWorkshopId);
 
     if (!response.success) {
+      openSnackBar("error", response.message);
       return;
     }
 
     fetchData();
     closeModal();
+    openSnackBar("success", response.message);
   };
 
   const deleteWorkshopFunction = async () => {
@@ -100,11 +128,13 @@ const AdminWorkshopPageSection = () => {
     const response = await deleteWorkshopById(targetWorkshopId);
 
     if (!response.success) {
+      openSnackBar("error", response.message);
       return;
     }
 
     fetchData();
     closeModal();
+    openSnackBar("success", response.message);
   };
 
   const getModalContainerByVariant = (
@@ -184,6 +214,12 @@ const AdminWorkshopPageSection = () => {
       >
         {getModalContainerByVariant(modalVariant)}
       </AdminModalComponent>
+      <SnackBarComponent
+        variant={snackBar.type}
+        message={snackBar.message}
+        isVisible={snackBar.isOpen}
+        closeSnackBar={() => closeSnackBarComponent()}
+      />
     </>
   );
 };
