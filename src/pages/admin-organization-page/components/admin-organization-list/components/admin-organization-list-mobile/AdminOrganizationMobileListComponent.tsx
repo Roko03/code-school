@@ -3,11 +3,15 @@ import AdminOrganizationMobileListItem from "./admin-organization-list-mobile-it
 
 interface AdminOrganizationMobileListComponentProps {
   organizationList: null | OrganizationType[];
+  openModalByVariant: (
+    variant: "edit" | "detail" | "delete",
+    userId: null | number
+  ) => void;
 }
 
 const AdminOrganizationMobileListComponent: React.FC<
   AdminOrganizationMobileListComponentProps
-> = ({ organizationList }) => {
+> = ({ organizationList, openModalByVariant }) => {
   if (organizationList == null) {
     return <></>;
   }
@@ -23,6 +27,10 @@ const AdminOrganizationMobileListComponent: React.FC<
           <AdminOrganizationMobileListItem
             key={organization.id}
             organization={organization}
+            openModalByVariant={(
+              variant: "edit" | "detail" | "delete",
+              userid: null | number
+            ) => openModalByVariant(variant, userid)}
           />
         );
       })}

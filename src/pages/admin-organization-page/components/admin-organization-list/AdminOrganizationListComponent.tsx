@@ -5,11 +5,15 @@ import AdminOrganizationTableComponent from "./components/admin-organization-tab
 interface AdminOrganizationListComponentProps {
   isLoading: boolean;
   organizationList: null | OrganizationType[];
+  openModalByVariant: (
+    variant: "edit" | "detail" | "delete",
+    userId: null | number
+  ) => void;
 }
 
 const AdminOrganizationListComponent: React.FC<
   AdminOrganizationListComponentProps
-> = ({ organizationList, isLoading }) => {
+> = ({ organizationList, isLoading, openModalByVariant }) => {
   if (isLoading) {
     return <CircularProgressComponent />;
   }
@@ -20,12 +24,23 @@ const AdminOrganizationListComponent: React.FC<
   if (organizationList.length == 0) {
     return <p>Nema prikaza</p>;
   }
+
   return (
     <>
       <AdminOrganizationMobileListComponent
         organizationList={organizationList}
+        openModalByVariant={(
+          variant: "edit" | "detail" | "delete",
+          userid: null | number
+        ) => openModalByVariant(variant, userid)}
       />
-      <AdminOrganizationTableComponent organizationList={organizationList} />
+      <AdminOrganizationTableComponent
+        organizationList={organizationList}
+        openModalByVariant={(
+          variant: "edit" | "detail" | "delete",
+          userid: null | number
+        ) => openModalByVariant(variant, userid)}
+      />
     </>
   );
 };

@@ -3,11 +3,15 @@ import styles from "./AdminOrganizationTableComponent.module.scss";
 
 interface AdminOrganizationTableComponentProps {
   organizationList: OrganizationType[];
+  openModalByVariant: (
+    variant: "edit" | "detail" | "delete",
+    userId: null | number
+  ) => void;
 }
 
 const AdminOrganizationTableComponent: React.FC<
   AdminOrganizationTableComponentProps
-> = ({ organizationList }) => {
+> = ({ organizationList, openModalByVariant }) => {
   return (
     <table className={styles.admin_organization_table}>
       <thead>
@@ -26,6 +30,10 @@ const AdminOrganizationTableComponent: React.FC<
             <AdminOrganizationTableItem
               key={organization.id}
               organization={organization}
+              openModalByVariant={(
+                variant: "edit" | "detail" | "delete",
+                userid: null | number
+              ) => openModalByVariant(variant, userid)}
             />
           );
         })}

@@ -3,11 +3,15 @@ import styles from "./AdminOrganizationMobileListItem.module.scss";
 
 interface AdminOrganizationMobileListItemProps {
   organization: OrganizationType;
+  openModalByVariant: (
+    variant: "edit" | "detail" | "delete",
+    userId: null | number
+  ) => void;
 }
 
 const AdminOrganizationMobileListItem: React.FC<
   AdminOrganizationMobileListItemProps
-> = ({ organization }) => {
+> = ({ organization, openModalByVariant }) => {
   return (
     <div className={styles.organization_item}>
       <div className={styles.organization_item__data}>
@@ -19,17 +23,26 @@ const AdminOrganizationMobileListItem: React.FC<
         <p>{organization.info}</p>
       </div>
       <div className={styles.organization_item__function}>
-        <button className={styles.organization_link}>
+        <button
+          className={styles.organization_link}
+          onClick={() => openModalByVariant("detail", organization.id)}
+        >
           <p>Detalji</p>
         </button>
         <div className={styles.organization_item__function__buttons}>
-          <ButtonComponent variant={"adminEdit"}>
+          <ButtonComponent
+            variant={"adminEdit"}
+            onClick={() => openModalByVariant("edit", organization.id)}
+          >
             <img src={"/pencil.svg"} alt="trash" />
             <span>
               <p>Uredi</p>
             </span>
           </ButtonComponent>
-          <ButtonComponent variant={"adminTrash"}>
+          <ButtonComponent
+            variant={"adminTrash"}
+            onClick={() => openModalByVariant("delete", organization.id)}
+          >
             <img src={"/trash.svg"} alt="trash" />
             <span>
               <p>Izbriši</p>
