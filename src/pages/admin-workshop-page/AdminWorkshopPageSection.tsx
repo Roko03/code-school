@@ -11,6 +11,8 @@ import AdminWorkshopFormComponent, {
 } from "./components/admin-workshop-form/AdminWorkshopFormComponent";
 import getProfessor from "../../lib/user/getProfessor";
 import createWorkshop from "../../lib/workshop/createWorkshop";
+import editOrganizationById from "../../lib/organization/editOrganizationById";
+import editWorkshopById from "../../lib/workshop/editWorkshopById";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -75,6 +77,21 @@ const AdminWorkshopPageSection = () => {
     closeModal();
   };
 
+  const editWorkshopFunciton = async (data: TAdminWorkshopSchema) => {
+    if (targetWorkshopId == null) {
+      return;
+    }
+
+    const response = await editWorkshopById(data, targetWorkshopId);
+
+    if (!response.success) {
+      return;
+    }
+
+    fetchData();
+    closeModal();
+  };
+
   const getModalContainerByVariant = (
     variant: null | "add" | "edit" | "delete"
   ) => {
@@ -99,6 +116,9 @@ const AdminWorkshopPageSection = () => {
             workshop={targetWorkshop}
             variant={"edit"}
             professorList={professorList}
+            editFunction={(data: TAdminWorkshopSchema) =>
+              editWorkshopFunciton(data)
+            }
           />
         ),
         delete: <></>,

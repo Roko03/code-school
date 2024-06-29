@@ -2,7 +2,7 @@ import { ACCESS_TOKEN } from "../../constants"
 import { TAdminWorkshopSchema } from "../../pages/admin-workshop-page/components/admin-workshop-form/AdminWorkshopFormComponent"
 
 export default async function editWorkshopById(data: TAdminWorkshopSchema, workshopId: number) {
-    const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACK_BASE_URL}/api/workshop/${workshopId}`, {
+    const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACK_BASE_URL}/api/workshop/${workshopId}/`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
