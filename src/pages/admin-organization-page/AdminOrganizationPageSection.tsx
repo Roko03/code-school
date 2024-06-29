@@ -10,11 +10,13 @@ const AdminOrganizationPageSection = () => {
       id: 1,
       name: "Organizacija",
       info: "Organizacija info",
+      numb_of_users: 2,
     },
     {
       id: 2,
       name: "Organizacija",
       info: "Organizacija info",
+      numb_of_users: 3,
     },
   ]);
 

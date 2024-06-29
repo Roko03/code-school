@@ -14,7 +14,8 @@ const AdminOrganizationMobileListItem: React.FC<
       <div className={styles.organization_item__data}>
         <p>{organization.name}</p>
         <span>
-          <img src={"/people.svg"} alt="people" width={28} height={28} />0
+          <img src={"/people.svg"} alt="people" width={28} height={28} />
+          {organization.numb_of_users}
         </span>
         <p>{organization.info}</p>
       </div>

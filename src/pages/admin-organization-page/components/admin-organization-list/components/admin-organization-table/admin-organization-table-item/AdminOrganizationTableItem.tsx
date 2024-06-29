@@ -13,7 +13,7 @@ const AdminOrganizationTableItem: React.FC<AdminOrganizationTableItemProps> = ({
     <tr>
       <td>{organization.name}</td>
       <td>{organization.info}</td>
-      <td>0</td>
+      <td>{organization.numb_of_users}</td>
       <td className={styles.td_button_entry}>
         <Link to={"/admin/organization/"} className={styles.table_link}>
           <p>Detalji</p>

@@ -18,4 +18,5 @@ type OrganizationType = {
     id: number,
     name: string;
     info: string;
+    numb_of_users: number;
 }
