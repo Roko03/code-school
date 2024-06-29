@@ -4,14 +4,12 @@ import AdminWorkshopListComponent from "./components/admin-workshop-list/AdminWo
 import { ReactNode, useEffect, useState } from "react";
 import getAllWorkshop from "../../lib/workshop/getAllWorkshop";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
-import { number } from "zod";
 import getWorkshopById from "../../lib/workshop/getWorkshopById";
 import AdminWorkshopFormComponent, {
   TAdminWorkshopSchema,
 } from "./components/admin-workshop-form/AdminWorkshopFormComponent";
 import getProfessor from "../../lib/user/getProfessor";
 import createWorkshop from "../../lib/workshop/createWorkshop";
-import editOrganizationById from "../../lib/organization/editOrganizationById";
 import editWorkshopById from "../../lib/workshop/editWorkshopById";
 import AdminWorkshopDeleteComponent from "./components/admin-workshop-delete/AdminWorkshopDeleteComponent";
 import deleteWorkshopById from "../../lib/workshop/deleteWorkshopById";
