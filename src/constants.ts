@@ -3,6 +3,7 @@ export const patterns = {
 };
 
 export const LEVELS = { 'jun': "Junior", 'mid': 'Mid', 'sen': 'Senior' }
+
 export const SUBJECTS = { 'rjs': "React.JS", 'ex': 'Express', 'njs': 'Next.JS' }
 
 export const ACCESS_TOKEN = "access";

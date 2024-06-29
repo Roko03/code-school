@@ -6,6 +6,7 @@ import getAllWorkshop from "../../lib/workshop/getAllWorkshop";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import { number } from "zod";
 import getWorkshopById from "../../lib/workshop/getWorkshopById";
+import AdminWorkshopFormComponent from "./components/admin-workshop-form/AdminWorkshopFormComponent";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -83,7 +84,7 @@ const AdminWorkshopPageSection = () => {
         isOpen={isModalOpen}
         closeDialog={closeModal}
       >
-        <div>Ej</div>
+        <AdminWorkshopFormComponent workshop={targetWorkshop} />
       </AdminModalComponent>
     </>
   );

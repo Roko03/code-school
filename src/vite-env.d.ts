@@ -21,9 +21,8 @@ type OrganizationType = {
     numb_of_users: number;
 }
 
-type Level = 'jun' | 'mid' | 'sen'
-
-type Subject = 'rjs' | 'ex' | 'njs';
+type Level = typeof LEVELS[keyof typeof LEVELS]
+type Subject = typeof SUBJECTS[keyof typeof SUBJECTS];
 
 type WorkshopType = {
     id: number;
