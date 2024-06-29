@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ButtonComponent from "../../../../../../../components/button/ButtonComponent";
 import styles from "./AdminOrganizationTableItem.module.scss";
 
@@ -15,9 +14,9 @@ const AdminOrganizationTableItem: React.FC<AdminOrganizationTableItemProps> = ({
       <td>{organization.info}</td>
       <td>{organization.numb_of_users}</td>
       <td className={styles.td_button_entry}>
-        <Link to={"/admin/organization/"} className={styles.table_link}>
+        <button className={styles.table_link}>
           <p>Detalji</p>
-        </Link>
+        </button>
       </td>
       <td className={styles.td_button}>
         <ButtonComponent variant={"adminEdit"}>

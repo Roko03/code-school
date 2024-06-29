@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ButtonComponent from "../../../../../../../components/button/ButtonComponent";
 import styles from "./AdminOrganizationMobileListItem.module.scss";
 
@@ -20,9 +19,9 @@ const AdminOrganizationMobileListItem: React.FC<
         <p>{organization.info}</p>
       </div>
       <div className={styles.organization_item__function}>
-        <Link to={"/admin/organization/"} className={styles.organization_link}>
+        <button className={styles.organization_link}>
           <p>Detalji</p>
-        </Link>
+        </button>
         <div className={styles.organization_item__function__buttons}>
           <ButtonComponent variant={"adminEdit"}>
             <img src={"/pencil.svg"} alt="trash" />

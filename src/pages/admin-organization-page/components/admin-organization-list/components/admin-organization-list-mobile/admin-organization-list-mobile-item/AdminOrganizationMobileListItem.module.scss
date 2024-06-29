@@ -29,8 +29,13 @@
     gap: rem(24);
 
     .organization_link {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-size: rem(18);
       color: $blue;
       text-decoration: underline;
+      cursor: pointer;
     }
 
     &__buttons {
