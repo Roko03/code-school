@@ -21,3 +21,8 @@ export const adminUserFormSchema = z.object({
         errorMap: () => ({ message: "Odaberi ulogu" })
     })
 })
+
+export const adminOrganizationFormSchema = z.object({
+    name: z.string().min(1, { message: "Unesite ime organizacije" }),
+    info: z.string().min(1, { message: "Unesite informacije o organizaciji" })
+})

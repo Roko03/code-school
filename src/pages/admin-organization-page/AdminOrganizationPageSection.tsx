@@ -6,6 +6,7 @@ import AdminModalComponent from "../../components/modal/admin/AdminModalComponen
 import { number } from "zod";
 import getOrganizationById from "../../lib/organization/getOrganizationById";
 import AdminOrganizationDetailComponent from "./components/admin-organization-detail/AdminOrganizationDetailComponent";
+import AdminOrganizationFormComponent from "./components/admin-organization-form/AdminOrganizationFormComponent";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -67,8 +68,15 @@ const AdminOrganizationPageSection = () => {
     const containerVariant: {
       [key in "add" | "edit" | "delete" | "detail"]: ReactNode;
     } = {
-      add: <></>,
-      edit: <></>,
+      add: (
+        <AdminOrganizationFormComponent variant={"edit"} organization={null} />
+      ),
+      edit: (
+        <AdminOrganizationFormComponent
+          variant={"edit"}
+          organization={targetOrganization}
+        />
+      ),
       delete: <></>,
       detail: (
         <AdminOrganizationDetailComponent organization={targetOrganization} />
