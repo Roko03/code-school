@@ -10,11 +10,15 @@ import { LEVELS, SUBJECTS } from "../../../../constants";
 export type TAdminWorkshopSchema = z.infer<typeof adminWorkshopFormSchema>;
 
 interface AdminWorkshopFormComponentProps {
+  variant: "add" | "edit";
   workshop: WorkshopType | null;
   professorList: UserType[] | null;
+  makeFunction?: (data: TAdminWorkshopSchema) => void;
+  editFunction?: (data: TAdminWorkshopSchema) => void;
 }
 
 const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
+  variant,
   workshop,
   professorList,
 }) => {
@@ -32,8 +36,28 @@ const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
   }
 
   const onSubmit = async (data: TAdminWorkshopSchema) => {
-    console.log(data);
+    if (variant == "add") {
+      console.log(data);
+      reset();
+    } else {
+      console.log("uredeno");
+    }
   };
+
+  useEffect(() => {
+    if (workshop == null) {
+      reset({});
+    } else {
+      reset({
+        name: workshop.name,
+        time: workshop.time,
+        user_id: String(workshop.user_id),
+        info: workshop.info,
+        level: workshop.level,
+        subject: workshop.subject,
+      });
+    }
+  }, [workshop]);
 
   return (
     <form

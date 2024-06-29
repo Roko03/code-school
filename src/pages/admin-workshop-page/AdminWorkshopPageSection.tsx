@@ -1,7 +1,7 @@
 import styles from "./AdminWorkshopPageSection.module.scss";
 import ButtonComponent from "../../components/button/ButtonComponent";
 import AdminWorkshopListComponent from "./components/admin-workshop-list/AdminWorkshopListComponent";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import getAllWorkshop from "../../lib/workshop/getAllWorkshop";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import { number } from "zod";
@@ -61,6 +61,35 @@ const AdminWorkshopPageSection = () => {
     setTargetWorkshop(response);
   };
 
+  const getModalContainerByVariant = (
+    variant: null | "add" | "edit" | "delete"
+  ) => {
+    if (variant == null) {
+      return <></>;
+    }
+
+    const containerVariant: { [key in "add" | "edit" | "delete"]: ReactNode } =
+      {
+        add: (
+          <AdminWorkshopFormComponent
+            workshop={null}
+            variant={"add"}
+            professorList={professorList}
+          />
+        ),
+        edit: (
+          <AdminWorkshopFormComponent
+            workshop={targetWorkshop}
+            variant={"edit"}
+            professorList={professorList}
+          />
+        ),
+        delete: <></>,
+      };
+
+    return containerVariant[variant];
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -72,7 +101,13 @@ const AdminWorkshopPageSection = () => {
   return (
     <>
       <section className={styles.admin_workshop_section}>
-        <ButtonComponent variant={"add"}>
+        <ButtonComponent
+          variant={"add"}
+          onClick={() => {
+            setIsModalOpen(true);
+            setModalVariant("add");
+          }}
+        >
           <p>Dodaj radionicu</p>
         </ButtonComponent>
         <AdminWorkshopListComponent
@@ -89,10 +124,7 @@ const AdminWorkshopPageSection = () => {
         isOpen={isModalOpen}
         closeDialog={closeModal}
       >
-        <AdminWorkshopFormComponent
-          workshop={targetWorkshop}
-          professorList={professorList}
-        />
+        {getModalContainerByVariant(modalVariant)}
       </AdminModalComponent>
     </>
   );
