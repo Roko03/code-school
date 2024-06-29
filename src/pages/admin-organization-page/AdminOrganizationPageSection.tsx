@@ -6,7 +6,10 @@ import AdminModalComponent from "../../components/modal/admin/AdminModalComponen
 import { number } from "zod";
 import getOrganizationById from "../../lib/organization/getOrganizationById";
 import AdminOrganizationDetailComponent from "./components/admin-organization-detail/AdminOrganizationDetailComponent";
-import AdminOrganizationFormComponent from "./components/admin-organization-form/AdminOrganizationFormComponent";
+import AdminOrganizationFormComponent, {
+  TAdminOrganizationSchema,
+} from "./components/admin-organization-form/AdminOrganizationFormComponent";
+import editOrganizationById from "../../lib/organization/editOrganizationById";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -58,6 +61,21 @@ const AdminOrganizationPageSection = () => {
     setTargetOrganization(null);
   };
 
+  const editOrganizationFunction = async (data: TAdminOrganizationSchema) => {
+    if (targetId == null) {
+      return;
+    }
+
+    const response = await editOrganizationById(data, targetId);
+
+    if (!response.success) {
+      return;
+    }
+
+    closeModal();
+    fetchOrganizations();
+  };
+
   const getContainerByModalVariant = (
     type: null | "add" | "edit" | "delete" | "detail"
   ) => {
@@ -75,6 +93,7 @@ const AdminOrganizationPageSection = () => {
         <AdminOrganizationFormComponent
           variant={"edit"}
           organization={targetOrganization}
+          editFunction={editOrganizationFunction}
         />
       ),
       delete: <></>,

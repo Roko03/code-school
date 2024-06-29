@@ -34,7 +34,7 @@ const AdminOrganizationFormComponent: React.FC<
       console.log(data);
       reset();
     } else {
-      console.log("Uredi");
+      if (editFunction) editFunction(data);
     }
   };
 
