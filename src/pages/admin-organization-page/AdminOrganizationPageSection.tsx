@@ -11,6 +11,7 @@ import AdminOrganizationFormComponent, {
 import editOrganizationById from "../../lib/organization/editOrganizationById";
 import ButtonComponent from "../../components/button/ButtonComponent";
 import createOrganization from "../../lib/organization/createOrganization";
+import AdminOrganizationDeleteComponent from "./components/admin-organization-delete/AdminOrganizationDeleteComponent";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -116,7 +117,13 @@ const AdminOrganizationPageSection = () => {
           }
         />
       ),
-      delete: <></>,
+      delete: (
+        <AdminOrganizationDeleteComponent
+          organization={targetOrganization}
+          closeDialog={closeModal}
+          deleteFunction={() => {}}
+        />
+      ),
       detail: (
         <AdminOrganizationDetailComponent organization={targetOrganization} />
       ),
