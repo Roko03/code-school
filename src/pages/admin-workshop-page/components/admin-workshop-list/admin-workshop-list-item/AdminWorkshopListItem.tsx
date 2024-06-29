@@ -1,4 +1,5 @@
 import ButtonComponent from "../../../../../components/button/ButtonComponent";
+import { LEVELS, SUBJECTS } from "../../../../../constants";
 import { formatDate } from "../../../../../util/formatDate";
 import styles from "./AdminWorkshopListItem.module.scss";
 
@@ -35,7 +36,7 @@ const AdminWorkshopListItem: React.FC<AdminWorkshopListItemProps> = ({
           <p>{formatDate(workshop.time)}</p>
           <p>{workshop.info}</p>
           <span className={styles.workshop_item__info__top__level}>
-            {workshop.level}
+            {LEVELS[workshop.level]}
           </span>
         </div>
         <div className={styles.workshop_item__info__bottom}>
@@ -44,7 +45,7 @@ const AdminWorkshopListItem: React.FC<AdminWorkshopListItemProps> = ({
             <p>0</p>
           </span>
           <p className={styles.workshop_item__info__bottom__subject}>
-            {workshop.subject}
+            {SUBJECTS[workshop.subject]}
           </p>
         </div>
       </div>
