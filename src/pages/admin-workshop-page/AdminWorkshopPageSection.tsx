@@ -7,9 +7,11 @@ import AdminModalComponent from "../../components/modal/admin/AdminModalComponen
 import { number } from "zod";
 import getWorkshopById from "../../lib/workshop/getWorkshopById";
 import AdminWorkshopFormComponent from "./components/admin-workshop-form/AdminWorkshopFormComponent";
+import getProfessor from "../../lib/user/getProfessor";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
+  const [professorList, setProfessorList] = useState<null | UserType[]>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalVariant, setModalVariant] = useState<
@@ -38,11 +40,14 @@ const AdminWorkshopPageSection = () => {
     setTargetWorkshopId(workshopId);
   };
 
-  const fetchWorkshops = async () => {
+  const fetchData = async () => {
     setIsLoading(true);
-    const response = await getAllWorkshop();
+    const workshops = await getAllWorkshop();
 
-    setWorkshopList(response);
+    const professors = await getProfessor();
+
+    setWorkshopList(workshops);
+    setProfessorList(professors);
 
     setIsLoading(false);
   };
@@ -57,7 +62,7 @@ const AdminWorkshopPageSection = () => {
   };
 
   useEffect(() => {
-    fetchWorkshops();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -84,7 +89,10 @@ const AdminWorkshopPageSection = () => {
         isOpen={isModalOpen}
         closeDialog={closeModal}
       >
-        <AdminWorkshopFormComponent workshop={targetWorkshop} />
+        <AdminWorkshopFormComponent
+          workshop={targetWorkshop}
+          professorList={professorList}
+        />
       </AdminModalComponent>
     </>
   );

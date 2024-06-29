@@ -11,10 +11,12 @@ export type TAdminWorkshopSchema = z.infer<typeof adminWorkshopFormSchema>;
 
 interface AdminWorkshopFormComponentProps {
   workshop: WorkshopType | null;
+  professorList: UserType[] | null;
 }
 
 const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
   workshop,
+  professorList,
 }) => {
   const {
     register,
@@ -24,6 +26,10 @@ const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
   } = useForm<TAdminWorkshopSchema>({
     resolver: zodResolver(adminWorkshopFormSchema),
   });
+
+  if (professorList == null) {
+    return <p>Potrebni su instruktori kako bi dodali radionicu</p>;
+  }
 
   const onSubmit = async (data: TAdminWorkshopSchema) => {
     console.log(data);
@@ -46,20 +52,33 @@ const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
       </label>
       <label>
         <input
-          type="date"
-          {...register("date")}
-          placeholder="Upiši ime radionice"
+          type="datetime-local"
+          {...register("time")}
+          placeholder="Upiši vrijeme radionice"
         />
-        {errors.date && (
-          <p className="form_error">{`${errors.date.message}`}</p>
+        {errors.time && (
+          <p className="form_error">{`${errors.time.message}`}</p>
         )}
       </label>
       <label>
-        <select {...register("instructor")}>
+        <select {...register("user_id")}>
           <option value="">Izaberi predavača</option>
+          {professorList.length > 0 ? (
+            <>
+              {professorList.map((instructor) => {
+                return (
+                  <option key={instructor.id} value={instructor.id}>
+                    {instructor.username}
+                  </option>
+                );
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         </select>
-        {errors.instructor && (
-          <p className="form_error">{`${errors.instructor.message}`}</p>
+        {errors.user_id && (
+          <p className="form_error">{`${errors.user_id.message}`}</p>
         )}
       </label>
       <label>

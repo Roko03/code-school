@@ -29,8 +29,8 @@ export const adminOrganizationFormSchema = z.object({
 
 export const adminWorkshopFormSchema = z.object({
     name: z.string().min(1, { message: "Unesite ime radionice" }),
-    date: z.string().min(1, { message: "Unesite datum radionice" }),
-    instructor: z.string().min(1, { message: "Morate odabrati predavača" }),
+    time: z.string().min(1, { message: "Unesite datum radionice" }),
+    user_id: z.string().min(1, { message: "Morate odabrati predavača" }),
     info: z
         .string()
         .min(5, { message: "Morate unijeti informacije o radionici" })
