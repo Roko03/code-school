@@ -33,4 +33,6 @@ type WorkshopType = {
     level: Level;
     subject: Subject;
     user_id: number;
+    user: UserType;
+    numb_of_users: number;
 }
