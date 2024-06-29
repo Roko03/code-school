@@ -13,6 +13,7 @@ import ButtonComponent from "../../components/button/ButtonComponent";
 import createOrganization from "../../lib/organization/createOrganization";
 import AdminOrganizationDeleteComponent from "./components/admin-organization-delete/AdminOrganizationDeleteComponent";
 import deleteOrganizationById from "../../lib/organization/deleteOrganizationById";
+import SnackBarComponent from "../../components/snack-bar/SnackBarComponent";
 
 const AdminOrganizationPageSection = () => {
   const [organizationList, setOrganizationList] = useState<
@@ -29,6 +30,12 @@ const AdminOrganizationPageSection = () => {
     useState<null | OrganizationType>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [snackBar, setSnackBar] = useState<SnackBarType>({
+    isOpen: false,
+    message: null,
+    type: null,
+  });
 
   const fetchOrganizations = async () => {
     setIsLoading(true);
@@ -64,6 +71,23 @@ const AdminOrganizationPageSection = () => {
     setTargetOrganization(null);
   };
 
+  const closeSnackBarComponent = () => {
+    setSnackBar((prev) => {
+      return {
+        ...prev,
+        isOpen: false,
+      };
+    });
+  };
+
+  const openSnackBar = (type: "error" | "success", message: string) => {
+    setSnackBar({
+      isOpen: true,
+      message: message,
+      type: type,
+    });
+  };
+
   const editOrganizationFunction = async (data: TAdminOrganizationSchema) => {
     if (targetId == null) {
       return;
@@ -72,9 +96,11 @@ const AdminOrganizationPageSection = () => {
     const response = await editOrganizationById(data, targetId);
 
     if (!response.success) {
+      openSnackBar("error", response.message);
       return;
     }
 
+    openSnackBar("success", response.message);
     closeModal();
     fetchOrganizations();
   };
@@ -83,9 +109,11 @@ const AdminOrganizationPageSection = () => {
     const response = await createOrganization(data);
 
     if (!response.success) {
+      openSnackBar("error", response.message);
       return;
     }
 
+    openSnackBar("success", response.message);
     closeModal();
     fetchOrganizations();
   };
@@ -98,9 +126,11 @@ const AdminOrganizationPageSection = () => {
     const response = await deleteOrganizationById(targetId);
 
     if (!response.success) {
+      openSnackBar("error", response.message);
       return;
     }
 
+    openSnackBar("success", response.message);
     closeModal();
     fetchOrganizations();
   };
@@ -184,6 +214,12 @@ const AdminOrganizationPageSection = () => {
       >
         {getContainerByModalVariant(modalVariant)}
       </AdminModalComponent>
+      <SnackBarComponent
+        variant={snackBar.type}
+        message={snackBar.message}
+        isVisible={snackBar.isOpen}
+        closeSnackBar={() => closeSnackBarComponent()}
+      />
     </>
   );
 };
