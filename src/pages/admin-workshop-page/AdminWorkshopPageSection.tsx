@@ -6,8 +6,11 @@ import getAllWorkshop from "../../lib/workshop/getAllWorkshop";
 import AdminModalComponent from "../../components/modal/admin/AdminModalComponent";
 import { number } from "zod";
 import getWorkshopById from "../../lib/workshop/getWorkshopById";
-import AdminWorkshopFormComponent from "./components/admin-workshop-form/AdminWorkshopFormComponent";
+import AdminWorkshopFormComponent, {
+  TAdminWorkshopSchema,
+} from "./components/admin-workshop-form/AdminWorkshopFormComponent";
 import getProfessor from "../../lib/user/getProfessor";
+import createWorkshop from "../../lib/workshop/createWorkshop";
 
 const AdminWorkshopPageSection = () => {
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
@@ -27,8 +30,8 @@ const AdminWorkshopPageSection = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalVariant(null);
     setTargetWorkshopId(null);
+    setTargetWorkshop(null);
   };
 
   const openModalByVariant = (
@@ -61,6 +64,17 @@ const AdminWorkshopPageSection = () => {
     setTargetWorkshop(response);
   };
 
+  const makeWorkshopFunction = async (data: TAdminWorkshopSchema) => {
+    const response = await createWorkshop(data);
+
+    if (!response.success) {
+      return;
+    }
+
+    fetchData();
+    closeModal();
+  };
+
   const getModalContainerByVariant = (
     variant: null | "add" | "edit" | "delete"
   ) => {
@@ -75,6 +89,9 @@ const AdminWorkshopPageSection = () => {
             workshop={null}
             variant={"add"}
             professorList={professorList}
+            makeFunction={(data: TAdminWorkshopSchema) =>
+              makeWorkshopFunction(data)
+            }
           />
         ),
         edit: (

@@ -21,6 +21,8 @@ const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
   variant,
   workshop,
   professorList,
+  makeFunction,
+  editFunction,
 }) => {
   const {
     register,
@@ -37,10 +39,10 @@ const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
 
   const onSubmit = async (data: TAdminWorkshopSchema) => {
     if (variant == "add") {
-      console.log(data);
+      if (makeFunction) makeFunction(data);
       reset();
     } else {
-      console.log("uredeno");
+      if (editFunction) editFunction(data);
     }
   };
 
