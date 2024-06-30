@@ -6,7 +6,6 @@ import { adminWorkshopFormSchema } from "../../../../types/schema";
 import ButtonComponent from "../../../../components/button/ButtonComponent";
 import { useEffect } from "react";
 import { LEVELS, SUBJECTS } from "../../../../constants";
-import { formatDate } from "../../../../util/formatDate";
 
 export type TAdminWorkshopSchema = z.infer<typeof adminWorkshopFormSchema>;
 
