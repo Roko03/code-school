@@ -20,3 +20,18 @@ type OrganizationType = {
     info: string;
     numb_of_users: number;
 }
+
+type Level = typeof LEVELS[keyof typeof LEVELS]
+type Subject = typeof SUBJECTS[keyof typeof SUBJECTS];
+
+type WorkshopType = {
+    id: number;
+    name: string;
+    time: string;
+    info: string;
+    level: Level;
+    subject: Subject;
+    user_id: number;
+    user: UserType;
+    numb_of_users: number;
+}
