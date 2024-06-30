@@ -1,1 +1,10 @@
 @import "../../styles/main.scss";
+
+.admin_main_section {
+  padding-top: rem(24);
+
+  h1 {
+    font-size: rem(38);
+    font-weight: 600;
+  }
+}
