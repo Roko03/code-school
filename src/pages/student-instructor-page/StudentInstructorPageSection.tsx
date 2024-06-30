@@ -1,42 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./StudentInstructorPageSection.module.scss";
 import StudentInstructorListComponent from "./components/student-instructor-list/StudentInstructorListComponent";
+import getProfessorsWithOrganizations from "../../lib/user/getProfessorsWithOrganizations";
 
 const StudentInstructorPageSection = () => {
   const [instructorList, setInstructorList] = useState<
     null | StudentInstructor[]
-  >([
-    {
-      id: 2,
-      username: "Jakov",
-      email: "jakov@gmail.com",
-      bio: "Jakov biografija1",
-      organizations: [
-        {
-          id: 1,
-          name: "Organizacijaaa",
-          info: "Organizacija info",
-        },
-      ],
-    },
-    {
-      id: 15,
-      username: "karlo",
-      email: "karlo@gmail.com",
-      bio: null,
-      organizations: [
-        {
-          id: 1,
-          name: "Organizacijaaa",
-          info: "Organizacija info",
-        },
-      ],
-    },
-  ]);
+  >(null);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetchInstructors = async () => {
+    setIsLoading(true);
+    const response = await getProfessorsWithOrganizations();
+
+    setInstructorList(response);
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchInstructors();
+  }, []);
 
   return (
     <section className={styles.student_instructor_section}>
-      <StudentInstructorListComponent instructorList={instructorList} />
+      <StudentInstructorListComponent
+        instructorList={instructorList}
+        isLoading={isLoading}
+      />
     </section>
   );
 };
