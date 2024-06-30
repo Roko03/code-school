@@ -1,4 +1,5 @@
 import BannerLayout from "../../components/layout/banner-layout/BannerLayout";
+import StudentInstructorPageSection from "../../pages/student-instructor-page/StudentInstructorPageSection";
 
 const InstructorPage = () => {
   return (
@@ -7,7 +8,7 @@ const InstructorPage = () => {
       variant={"secondary"}
       bannerTitle={"Predavači"}
     >
-      <div>Predavači</div>
+      <StudentInstructorPageSection />
     </BannerLayout>
   );
 };
