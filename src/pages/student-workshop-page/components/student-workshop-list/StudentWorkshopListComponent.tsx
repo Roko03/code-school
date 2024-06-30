@@ -3,7 +3,7 @@ import styles from "./StudentWorkshopListComponent.module.scss";
 import StudentWorkshopListItemComponent from "./student-workshop-list-item/StudentWorkshopListItemComponent";
 
 interface StudentWorkshopListComponentProps {
-  workshopList: StudentWorkshopLoginType[] | null;
+  workshopList: WorkshopType[] | null;
 }
 
 const StudentWorkshopListComponent: React.FC<
@@ -19,7 +19,8 @@ const StudentWorkshopListComponent: React.FC<
       {workshopList.map((workshop) => {
         return (
           <StudentWorkshopListItemComponent
-            workshop={workshop.workshop}
+            key={workshop.id}
+            workshop={workshop}
             workshopItemOpen={workshopItemOpen}
             setWorkshopItemOpen={(id: number | null) => setWorkshopItemOpen(id)}
           />

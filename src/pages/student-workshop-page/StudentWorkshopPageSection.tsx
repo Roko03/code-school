@@ -1,33 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./StudentWorkshopPageSection.module.scss";
 import StudentWorkshopListComponent from "./components/student-workshop-list/StudentWorkshopListComponent";
+import getWorkshopByUser from "../../lib/workshop/getWorkshopByUser";
 
 const StudentWorkshopPageSection = () => {
-  const [workshopList, setWorkshopList] = useState<
-    null | StudentWorkshopLoginType[]
-  >([
-    {
-      id: 12,
-      workshop: {
-        id: 7,
-        user: {
-          id: 2,
-          username: "Jakov",
-          email: "jakov@gmail.com",
-          bio: "Jakov biografija1",
-          role: "prof",
-        },
-        numb_of_users: 1,
-        name: "Radionica 1",
-        time: "2024-06-21T07:00:00Z",
-        info: "Radionica 1 opis",
-        level: "jun",
-        subject: "rjs",
-        user_id: 2,
-      },
-      workshop_id: 7,
-    },
-  ]);
+  const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetchWorkshops = async () => {
+    setIsLoading(true);
+    const response = await getWorkshopByUser();
+
+    setWorkshopList(response);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchWorkshops();
+  }, []);
+
+  console.log(workshopList);
 
   return (
     <section className={styles.student_workshop_section}>
