@@ -1,9 +1,10 @@
 import MainLayout from "../../components/layout/main-layout/MainLayout";
+import ProfessorMainPageSection from "../../pages/professor-main-page/ProfessorMainPageSection";
 
 const ProfessorPage = () => {
   return (
     <MainLayout>
-      <div>ProfessorPage</div>
+      <ProfessorMainPageSection />
     </MainLayout>
   );
 };
