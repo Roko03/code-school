@@ -45,3 +45,9 @@ type ProfessorWorkshopType = {
     subject: Subject;
     numb_of_users: number;
 }
+
+type StudentWorkshopLoginType = {
+    id: number;
+    workshop: WorkshopType;
+    workshop_id: number;
+}
