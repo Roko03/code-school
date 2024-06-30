@@ -6,11 +6,12 @@ import CircularProgressComponent from "../../../../components/circular-progress/
 interface StudentWorkshopListComponentProps {
   workshopList: WorkshopType[] | null;
   isLoading: boolean;
+  workshopFunction: (id: number) => void;
 }
 
 const StudentWorkshopListComponent: React.FC<
   StudentWorkshopListComponentProps
-> = ({ workshopList, isLoading }) => {
+> = ({ workshopList, isLoading, workshopFunction }) => {
   const [workshopItemOpen, setWorkshopItemOpen] = useState<number | null>(null);
 
   if (isLoading) return <CircularProgressComponent />;
@@ -27,6 +28,7 @@ const StudentWorkshopListComponent: React.FC<
             workshop={workshop}
             workshopItemOpen={workshopItemOpen}
             setWorkshopItemOpen={(id: number | null) => setWorkshopItemOpen(id)}
+            workshopFunction={(id: number) => workshopFunction(id)}
           />
         );
       })}

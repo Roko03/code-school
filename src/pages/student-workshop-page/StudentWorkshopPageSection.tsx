@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import styles from "./StudentWorkshopPageSection.module.scss";
 import StudentWorkshopListComponent from "./components/student-workshop-list/StudentWorkshopListComponent";
 import getWorkshopByUser from "../../lib/workshop/getWorkshopByUser";
+import { authManager } from "../../util/useAuthContext";
+import appliedToWorkshop from "../../lib/workshop/appliedToWorkshop";
 
 const StudentWorkshopPageSection = () => {
+  const auth = authManager();
   const [workshopList, setWorkshopList] = useState<null | WorkshopType[]>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -15,6 +18,20 @@ const StudentWorkshopPageSection = () => {
     setIsLoading(false);
   };
 
+  const appliedToWorkshopFunction = async (workshop_id: number | null) => {
+    if (auth.user == null || workshop_id == null) {
+      return;
+    }
+
+    const response = await appliedToWorkshop(workshop_id, auth.user.id);
+
+    if (!response.success) {
+      return;
+    }
+
+    fetchWorkshops();
+  };
+
   useEffect(() => {
     fetchWorkshops();
   }, []);
@@ -24,6 +41,7 @@ const StudentWorkshopPageSection = () => {
       <StudentWorkshopListComponent
         workshopList={workshopList}
         isLoading={isLoading}
+        workshopFunction={(id: number) => appliedToWorkshopFunction(id)}
       />
     </section>
   );

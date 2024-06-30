@@ -8,11 +8,12 @@ interface StudentWorkshopListItemComponentProps {
   workshop: WorkshopType;
   workshopItemOpen: number | null;
   setWorkshopItemOpen: (id: number | null) => void;
+  workshopFunction: (id: number) => void;
 }
 
 const StudentWorkshopListItemComponent: React.FC<
   StudentWorkshopListItemComponentProps
-> = ({ workshop, workshopItemOpen, setWorkshopItemOpen }) => {
+> = ({ workshop, workshopItemOpen, setWorkshopItemOpen, workshopFunction }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleAccordionClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
@@ -40,7 +41,7 @@ const StudentWorkshopListItemComponent: React.FC<
           <p>{formatDate(workshop.time)}</p>
           <ButtonComponent
             variant={"entry"}
-            onClick={() => {}}
+            onClick={() => workshopFunction(workshop.id)}
             buttonRef={buttonRef}
           >
             <p>Prijavi se</p>
