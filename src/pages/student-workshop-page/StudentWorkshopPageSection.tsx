@@ -19,11 +19,12 @@ const StudentWorkshopPageSection = () => {
     fetchWorkshops();
   }, []);
 
-  console.log(workshopList);
-
   return (
     <section className={styles.student_workshop_section}>
-      <StudentWorkshopListComponent workshopList={workshopList} />
+      <StudentWorkshopListComponent
+        workshopList={workshopList}
+        isLoading={isLoading}
+      />
     </section>
   );
 };
