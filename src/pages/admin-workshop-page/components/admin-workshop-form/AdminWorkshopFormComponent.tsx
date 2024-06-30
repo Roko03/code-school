@@ -6,6 +6,7 @@ import { adminWorkshopFormSchema } from "../../../../types/schema";
 import ButtonComponent from "../../../../components/button/ButtonComponent";
 import { useEffect } from "react";
 import { LEVELS, SUBJECTS } from "../../../../constants";
+import { formatDate } from "../../../../util/formatDate";
 
 export type TAdminWorkshopSchema = z.infer<typeof adminWorkshopFormSchema>;
 
@@ -52,7 +53,7 @@ const AdminWorkshopFormComponent: React.FC<AdminWorkshopFormComponentProps> = ({
     } else {
       reset({
         name: workshop.name,
-        time: workshop.time,
+        time: new Date(workshop.time).toISOString().slice(0, 16),
         user_id: String(workshop.user_id),
         info: workshop.info,
         level: workshop.level,
