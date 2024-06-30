@@ -1,4 +1,5 @@
 import BannerLayout from "../../components/layout/banner-layout/BannerLayout";
+import StudentWorkshopPageSection from "../../pages/student-workshop-page/StudentWorkshopPageSection";
 
 const WorkshopPage = () => {
   return (
@@ -7,7 +8,7 @@ const WorkshopPage = () => {
       variant={"secondary"}
       bannerTitle={"Radionice"}
     >
-      <div>Radionice</div>
+      <StudentWorkshopPageSection />
     </BannerLayout>
   );
 };
