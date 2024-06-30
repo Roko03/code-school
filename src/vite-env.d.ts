@@ -35,3 +35,13 @@ type WorkshopType = {
     user: UserType;
     numb_of_users: number;
 }
+
+type ProfessorWorkshopType = {
+    id: number;
+    name: string;
+    time: string;
+    info: string;
+    level: Level;
+    subject: Subject;
+    numb_of_users: number;
+}

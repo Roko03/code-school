@@ -1,3 +1,4 @@
+import { ACCESS_TOKEN } from "../../constants";
 import { TAdminUserSchema } from "../../pages/admin-user-page/components/admin-user-form/AdminUserFormComponent";
 
 export default async function createUser(data: TAdminUserSchema) {
@@ -5,6 +6,7 @@ export default async function createUser(data: TAdminUserSchema) {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": "Bearer " + String(localStorage.getItem(ACCESS_TOKEN))
         },
         body: JSON.stringify(data)
     })
