@@ -11,5 +11,7 @@ export default async function getProfessorWorkshop() {
 
     if (!response.ok) return { success: false }
 
-    return await response.json()
+    const jsonData = await response.json()
+
+    return { success: true, data: jsonData }
 }
