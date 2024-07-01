@@ -1,4 +1,5 @@
 import BannerLayout from "../../components/layout/banner-layout/BannerLayout";
+import StudentMainPageSection from "../../pages/student-main-page/StudentMainPageSection";
 
 const HomePage = () => {
   return (
@@ -7,7 +8,7 @@ const HomePage = () => {
       variant={"main"}
       bannerTitle={"Dobrodošli na Code school"}
     >
-      <div>HomePage</div>
+      <StudentMainPageSection />
     </BannerLayout>
   );
 };
