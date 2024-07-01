@@ -1,13 +1,17 @@
+import CircularProgressComponent from "../../../../components/circular-progress/CircularProgressComponent";
 import styles from "./StudentMainPageWorkshopList.module.scss";
 import StudentMainPageWorkshopListItem from "./student-workshop-list-item/StudentMainPageWorkshopListItem";
 
 interface StudentMainPageWorkshopListProps {
   workshopList: StudentWorkshopLoginType[] | null;
+  isLoading: boolean;
 }
 
 const StudentMainPageWorkshopList: React.FC<
   StudentMainPageWorkshopListProps
-> = ({ workshopList }) => {
+> = ({ workshopList, isLoading }) => {
+  if (isLoading) return <CircularProgressComponent />;
+
   if (workshopList == null) return <></>;
 
   if (workshopList.length == 0)
