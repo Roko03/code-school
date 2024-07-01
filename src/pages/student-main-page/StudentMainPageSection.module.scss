@@ -1,0 +1,8 @@
+@import "../../styles/main.scss";
+
+.student_main_section {
+  padding: rem(56) 0;
+  @include breakpoint(large) {
+    padding: rem(92) 0;
+  }
+}
