@@ -51,3 +51,17 @@ type StudentWorkshopLoginType = {
     workshop: WorkshopType;
     workshop_id: number;
 }
+
+type StudentOrganization = {
+    id: number;
+    name: string;
+    info: string;
+}
+
+type StudentInstructor = {
+    id: number;
+    username: string;
+    email: string;
+    bio: string | null;
+    organizations: StudentOrganization[];
+}
