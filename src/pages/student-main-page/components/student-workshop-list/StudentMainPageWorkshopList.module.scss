@@ -1,10 +1,6 @@
 @import "../../../../styles/main.scss";
 
-.workshop_list {
-  display: flex;
-  flex-direction: column;
-  gap: rem(18);
-
+.workshop_list_container {
   h1 {
     text-align: center;
     font-size: rem(28);
@@ -14,4 +10,17 @@
       font-size: rem(54);
     }
   }
+}
+
+.workshop_list {
+  margin-top: rem(48);
+  display: flex;
+  flex-direction: column;
+  gap: rem(18);
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: rem(40);
+  justify-content: left;
 }

@@ -18,16 +18,18 @@ const StudentMainPageWorkshopList: React.FC<
       </div>
     );
   return (
-    <div className={styles.workshop_list}>
+    <div className={styles.workshop_list_container}>
       <h1>Moje radionice</h1>
-      {workshopList.map((workshopElement) => {
-        return (
-          <StudentMainPageWorkshopListItem
-            key={workshopElement.id}
-            workshop={workshopElement.workshop}
-          />
-        );
-      })}
+      <div className={styles.workshop_list}>
+        {workshopList.map((workshopElement) => {
+          return (
+            <StudentMainPageWorkshopListItem
+              key={workshopElement.id}
+              workshop={workshopElement.workshop}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
