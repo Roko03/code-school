@@ -1,0 +1,19 @@
+@import "../../../../styles/main.scss";
+
+.admin_user_role_selector {
+  margin-top: rem(32);
+  width: 100%;
+
+  @include breakpoint(medium) {
+    max-width: rem(350);
+  }
+  font-size: rem(18);
+  padding: rem(10) rem(20);
+  background-color: #f8f8f8;
+  border: 1px solid $grey;
+  border-radius: rem(6);
+  color: $black;
+  cursor: pointer;
+  font-family: $poppins;
+  outline: none;
+}

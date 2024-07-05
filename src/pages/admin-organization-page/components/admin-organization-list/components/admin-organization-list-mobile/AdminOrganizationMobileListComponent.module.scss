@@ -1,0 +1,11 @@
+@import "../../../../../../styles/main.scss";
+
+.organization_list {
+  display: flex;
+
+  @include breakpoint(large) {
+    display: none;
+  }
+  flex-direction: column;
+  gap: rem(24);
+}

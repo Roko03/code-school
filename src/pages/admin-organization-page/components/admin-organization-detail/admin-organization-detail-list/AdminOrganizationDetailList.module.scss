@@ -1,0 +1,7 @@
+@import "../../../../../styles/main.scss";
+
+.admin_organization_user_list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+}
